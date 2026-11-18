@@ -112,6 +112,20 @@ export const experience: Experience[] = [
     link: { label: 'MettaLogic', href: 'https://github.com/Ofgeha-Gelana/MettaLogic' },
   },
   {
+    org: 'Cooperative Bank of Oromia',
+    role: 'AI/ML Engineer & Backend Developer',
+    period: 'Sep 2024 — Jun 2025',
+    summary: 'Machine learning for predictive analytics in banking operations, from model design to production backend services.',
+    highlights: [
+      'Designed and deployed machine-learning models for predictive analytics in production systems.',
+      'Built backend services that integrate ML models into operational workflows.',
+      'Automated model-driven decision steps to improve system performance.',
+      'Implemented regression, tree-based and neural-network models.',
+    ],
+    stack: ['Python', 'scikit-learn', 'Model serving', 'REST APIs'],
+    review: 'Stack chips are inferred from the resume bullets; adjust to the exact tools you used.',
+  },
+  {
     org: 'Ethiopian Artificial Intelligence Institute',
     role: 'AI Researcher & Developer',
     period: '2023 — Present',
