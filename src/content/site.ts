@@ -68,6 +68,8 @@ export const about = {
 
 export type Experience = {
   org: string;
+  /** Shorter name for compact places such as the "Worked with" strip. */
+  short?: string;
   orgNote?: string;
   role: string;
   period: string;
@@ -125,6 +127,7 @@ export const experience: Experience[] = [
   },
   {
     org: 'Ethiopian Artificial Intelligence Institute',
+    short: 'Ethiopian AI Institute',
     role: 'AI Researcher & Developer',
     period: '2023 — Jul 2024',
     summary:
@@ -138,6 +141,7 @@ export const experience: Experience[] = [
   },
   {
     org: 'Information Network Security Agency',
+    short: 'INSA',
     role: 'Python Django Developer · Intern',
     period: '2022 — 2023',
     summary: 'Backend engineering on Django applications in an Agile team.',
