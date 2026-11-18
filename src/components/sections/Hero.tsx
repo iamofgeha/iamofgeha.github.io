@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import avatar from '../../assets/images/avatar.webp';
-import { profile } from '../../content/site';
+import { experience, profile } from '../../content/site';
 import { ButtonLink } from '../ui/Button';
 import { GitHubIcon, LinkedInIcon, MediumIcon } from '../ui/icons';
 
@@ -77,6 +77,17 @@ export function Hero() {
                 >
                   <Icon size={18} />
                 </a>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        <motion.div {...enter(0.34)} className="mt-14 border-t hairline pt-6">
+          <p className="text-xs text-subtle">Worked with</p>
+          <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+            {experience.map((job) => (
+              <li key={job.org} className="text-sm font-medium text-muted">
+                {job.short ?? job.org}
               </li>
             ))}
           </ul>
