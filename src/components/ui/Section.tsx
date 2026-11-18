@@ -3,8 +3,6 @@ import { Reveal } from './Reveal';
 
 type SectionProps = {
   id: string;
-  /** Deprecated: kept until every section is migrated. */
-  index?: string;
   label: string;
   title?: ReactNode;
   intro?: ReactNode;
@@ -30,7 +28,3 @@ export function Section({ id, label, title, intro, children, className = '' }: S
   );
 }
 
-/** Emphasis inside headings. Plain weight in the simplified design. */
-export function Em({ children }: { children: ReactNode }) {
-  return <span className="text-muted">{children}</span>;
-}

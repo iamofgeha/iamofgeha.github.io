@@ -19,7 +19,7 @@ function Verify({ href, label }: { href?: string; label: string }) {
 
 export function Credentials() {
   return (
-    <Section id="education" index="05" label="Education" title="Education & certifications">
+    <Section id="education" label="Education" title="Education & certifications">
       <div className="grid gap-10 md:grid-cols-2">
         <div>
           <h3 className="text-sm font-medium text-muted">Education</h3>
