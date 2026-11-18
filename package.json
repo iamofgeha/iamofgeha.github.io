@@ -1,15 +1,14 @@
 {
-  "name": "vite-react-typescript-starter",
+  "name": "ofgeha-portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run typecheck && vite build",
+    "typecheck": "tsc -p tsconfig.app.json && tsc -p tsconfig.node.json",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "homepage": "https://Ofgeha-Gelana.github.io/reac-portfolio"
-
+    "preview": "vite preview"
   },
   "dependencies": {
     "framer-motion": "^11.11.11",

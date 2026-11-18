@@ -1,48 +1,44 @@
-name: Deploy React App to GitHub Pages
+name: Deploy to GitHub Pages
+
+# Publishes the site to https://iamofgeha.github.io on every push to main.
+# One-time setup: repo Settings → Pages → Source: "GitHub Actions".
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
   deploy:
+    needs: build
     runs-on: ubuntu-latest
-
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      # Step 1: Checkout code
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Step 2: Set up Node.js environment
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Build the React app
-      - name: Build React app
-        run: npm run build
-
-      # Step 5: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.OFGEHA }}
-          publish_dir: ./dist
-
-  gitio:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      # Step 1: Create a short URL using git.io (manual setup required)
-      - name: Create git.io short link
-        run: |
-          echo "You can create a git.io short link manually using the GitHub Pages URL:"
-          echo "GitHub Pages URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
-          echo "Visit https://git.io and paste the URL to generate a custom short link."
+      - id: deployment
+        uses: actions/deploy-pages@v4

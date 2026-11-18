@@ -1,44 +1,40 @@
-import React, { useState } from 'react';
-import { Sun, Moon } from 'lucide-react';
-import Header from './components/Header';
-import Home from './components/Home';
-import About from './components/About';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import Hero from './components/Hero';
-import Skills from './components/Skills';
+import { useEffect } from 'react';
+import { MotionConfig } from 'framer-motion';
+import { Footer } from './components/layout/Footer';
+import { Nav } from './components/layout/Nav';
+import { About } from './components/sections/About';
+import { Contact } from './components/sections/Contact';
+import { Experience } from './components/sections/Experience';
+import { Hero } from './components/sections/Hero';
+import { Projects } from './components/sections/Projects';
+import { Research } from './components/sections/Research';
+import { Writing } from './components/sections/Writing';
 
-function App() {
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+export default function App() {
+  // The browser tries to jump to the URL hash before React has rendered, so deep links
+  // like /#work would land at the top. Re-apply the hash once the sections exist.
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (!id) return;
+    const raf = requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView());
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
-      <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
-        <Header />
-        <button
-          onClick={toggleDarkMode}
-          className="fixed top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white"
-          aria-label="Toggle dark mode"
-        >
-          {darkMode ? <Sun size={24} /> : <Moon size={24} />}
-        </button>
-        <main>
-          {/* <Home /> */}
+    <MotionConfig reducedMotion="user">
+      <div className="grain">
+        <Nav />
+        <main id="main" tabIndex={-1} className="outline-none">
           <Hero />
           <About />
-          <Skills />
+          <Experience />
           <Projects />
+          <Research />
+          <Writing />
           <Contact />
         </main>
         <Footer />
       </div>
-    </div>
+    </MotionConfig>
   );
 }
-
-export default App;

@@ -1,12 +1,84 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ofgeha - Data Scientist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- Absolute URLs below use VITE_SITE_URL from .env: changing the domain is a one-line edit there. -->
+    <title>Ofgeha Gelana — AI/ML Engineer &amp; Researcher</title>
+    <meta
+      name="description"
+      content="Ofgeha Gelana is an AI/ML engineer and researcher building research infrastructure for AI-driven hypothesis generation in human genetics, and practical machine learning and LLM systems."
+    />
+    <meta name="author" content="Ofgeha Gelana" />
+    <link rel="canonical" href="%VITE_SITE_URL%/" />
+    <meta name="theme-color" content="#0b0c0e" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f6f3" media="(prefers-color-scheme: light)" />
+    <meta name="color-scheme" content="dark light" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Ofgeha Gelana" />
+    <meta property="og:title" content="Ofgeha Gelana — AI/ML Engineer & Researcher" />
+    <meta
+      property="og:description"
+      content="Building intelligent systems. Exploring the science behind AI. Research infrastructure for AI-driven hypothesis generation, statistical genetics, and LLM engineering."
+    />
+    <meta property="og:url" content="%VITE_SITE_URL%/" />
+    <meta property="og:image" content="%VITE_SITE_URL%/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ofgeha Gelana — AI/ML Engineer & Researcher" />
+    <meta property="profile:first_name" content="Ofgeha" />
+    <meta property="profile:last_name" content="Gelana" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ofgeha Gelana — AI/ML Engineer & Researcher" />
+    <meta name="twitter:description" content="Building intelligent systems. Exploring the science behind AI." />
+    <meta name="twitter:image" content="%VITE_SITE_URL%/og-image.png" />
+
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ofgeha Gelana",
+        "jobTitle": "AI/ML Engineer & Researcher",
+        "url": "%VITE_SITE_URL%/",
+        "address": { "@type": "PostalAddress", "addressLocality": "Addis Ababa", "addressCountry": "ET" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Adama Science and Technology University" },
+        "knowsAbout": ["Machine Learning", "Large Language Models", "Statistical Genetics", "AI Systems Engineering"],
+        "sameAs": [
+          "https://github.com/Ofgeha-Gelana",
+          "https://www.linkedin.com/in/ofgeha-gelana/",
+          "https://medium.com/@ofgehagelana2019"
+        ]
+      }
+    </script>
+
+    <!-- Apply the saved theme before first paint to avoid a flash. -->
+    <script>
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
   </head>
   <body>
+    <noscript>
+      <p style="padding:2rem;font-family:system-ui">
+        Ofgeha Gelana — AI/ML Engineer &amp; Researcher.
+        <a href="https://github.com/Ofgeha-Gelana">GitHub</a> ·
+        <a href="https://www.linkedin.com/in/ofgeha-gelana/">LinkedIn</a>
+      </p>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
