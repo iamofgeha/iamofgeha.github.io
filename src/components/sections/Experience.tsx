@@ -13,7 +13,7 @@ function Badge({ job }: { job: Job }) {
         alt=""
         width={44}
         height={44}
-        className="h-11 w-11 shrink-0 rounded-lg border hairline object-contain"
+        className="h-11 w-11 shrink-0 rounded-lg border hairline object-cover"
       />
     );
   }
