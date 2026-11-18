@@ -153,7 +153,7 @@ export const experience: Experience[] = [
     logo: eaiiLogo,
     short: 'Ethiopian AI Institute',
     role: 'AI Researcher & Developer',
-    period: '2023 — Jul 2024',
+    period: 'Feb 2023 — Jul 2024',
     summary:
       'Research on machine-learning algorithms and AI systems, and development of experimental models for complex datasets.',
     highlights: [
