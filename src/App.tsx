@@ -23,7 +23,7 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="grain">
+      <div>
         <Nav />
         <main id="main" tabIndex={-1} className="outline-none">
           <Hero />
