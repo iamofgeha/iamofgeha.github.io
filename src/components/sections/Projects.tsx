@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Brain, Database, MessagesSquare, Network } from 'lucide-react';
 import { archive, builds, featured, type Build, type FeaturedProject, type Link } from '../../content/site';
 import { ProjectFigure } from '../figures/ProjectFigure';
 import { Details } from '../ui/Details';
@@ -97,12 +97,49 @@ function FeaturedCard({ p }: { p: FeaturedProject }) {
   );
 }
 
+const buildLinks = (b: Build): Link[] => [
+  ...(b.repo ? [{ label: 'Code', href: b.repo }] : []),
+  ...(b.live ? [{ label: 'Demo', href: b.live }] : []),
+  ...(b.writeup ? [{ label: 'Write-up', href: b.writeup }] : []),
+];
+
+const categoryIcon: Record<Build['category'], typeof Brain> = {
+  'LLM systems': MessagesSquare,
+  'Machine learning': Brain,
+  'Data engineering': Database,
+  Reasoning: Network,
+};
+
+function BuildCard({ b }: { b: Build }) {
+  const Icon = categoryIcon[b.category];
+  return (
+    <article className="flex h-full flex-col rounded-xl border hairline bg-surface/40 p-5 transition-colors hover:border-fg/20">
+      <div className="flex items-start gap-3">
+        <span
+          aria-hidden
+          className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border hairline bg-fg/[0.05] text-muted"
+        >
+          <Icon size={18} strokeWidth={1.6} />
+        </span>
+        <div className="min-w-0">
+          <h4 className="font-medium leading-snug">{b.title}</h4>
+          <p className="mt-0.5 text-xs text-subtle">
+            {b.category} · {b.year}
+          </p>
+        </div>
+      </div>
+      <p className="mt-3 line-clamp-3 flex-1 text-pretty text-sm leading-relaxed text-muted">{b.description}</p>
+      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1">
+        {buildLinks(b).map((l) => (
+          <ExtLink key={l.href} link={l} />
+        ))}
+      </div>
+    </article>
+  );
+}
+
 function BuildRow({ b }: { b: Build }) {
-  const links: Link[] = [
-    ...(b.repo ? [{ label: 'Code', href: b.repo }] : []),
-    ...(b.live ? [{ label: 'Demo', href: b.live }] : []),
-    ...(b.writeup ? [{ label: 'Write-up', href: b.writeup }] : []),
-  ];
+  const links = buildLinks(b);
   return (
     <li className="py-5">
       <div className="flex items-baseline justify-between gap-4">
@@ -132,12 +169,14 @@ export function Projects() {
 
       <Reveal className="mt-14">
         <h3 className="text-sm font-medium text-muted">Other projects</h3>
-        <ul className="mt-2 divide-y divide-hairline border-y hairline">
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {builds.map((b) => (
-            <BuildRow key={b.title} b={b} />
+            <li key={b.title}>
+              <BuildCard b={b} />
+            </li>
           ))}
         </ul>
-        <Details label={`Earlier analytics work (${archive.length})`} className="mt-5">
+        <Details label={`Earlier analytics work (${archive.length})`} className="mt-6">
           <ul className="divide-y divide-hairline border-y hairline">
             {archive.map((b) => (
               <BuildRow key={b.title} b={b} />
