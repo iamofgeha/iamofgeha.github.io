@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import { profile } from '../../content/site';
-import { SignalGraph } from '../figures/SignalGraph';
+import { SystemGraph } from '../figures/SystemGraph';
 import { ButtonLink } from '../ui/Button';
 import { GitHubIcon, LinkedInIcon, MediumIcon } from '../ui/icons';
 
@@ -101,13 +101,13 @@ export function Hero() {
             <div className="relative rounded-[1.75rem] border hairline bg-surface/60 p-6 shadow-[0_40px_80px_-40px_rgb(0_0_0/0.5)] backdrop-blur-sm sm:p-8">
               <div className="mb-2 flex items-center justify-between">
                 <span className="eyebrow">fig. 0</span>
-                <span className="eyebrow">variant → hypothesis</span>
+                <span className="eyebrow">data → production</span>
               </div>
-              <SignalGraph />
+              <SystemGraph />
             </div>
             <figcaption className="mt-4 px-2 text-xs leading-relaxed text-subtle">
-              The pipeline I work on, simplified. <span className="text-accent">Accent</span> marks the Open Targets
-              fast path that reuses published fine-mapping.
+              How I approach ML work: the model is one part of a system that has to be fed, evaluated, served and
+              watched. The <span className="text-accent">accent</span> marks the main path; dashed is the retraining loop.
             </figcaption>
           </motion.figure>
         </div>
