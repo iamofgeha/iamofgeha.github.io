@@ -129,7 +129,10 @@ function BuildCard({ b }: { b: Build }) {
           </p>
         </div>
       </div>
-      <p className="mt-3 line-clamp-3 flex-1 text-pretty text-sm leading-relaxed text-muted">{b.description}</p>
+      {/* flex-1 lives on the wrapper so the clamp itself keeps a fixed 3-line height. */}
+      <div className="mt-3 flex-1">
+        <p className="line-clamp-3 text-sm leading-relaxed text-muted">{b.description}</p>
+      </div>
       <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1">
         {buildLinks(b).map((l) => (
           <ExtLink key={l.href} link={l} />
