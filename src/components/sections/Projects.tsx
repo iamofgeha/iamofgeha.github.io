@@ -40,45 +40,45 @@ function FeaturedCard({ p }: { p: FeaturedProject }) {
         {p.links.map((l) => (
           <ExtLink key={l.href} link={l} />
         ))}
-        <Details>
-          <div className="space-y-5 border-t hairline pt-5">
-            <div>
-              <p className="text-xs font-medium text-subtle">Problem</p>
-              <p className="mt-1.5 text-pretty text-sm leading-relaxed text-muted">{p.problem}</p>
-            </div>
-            <div>
-              <p className="text-xs font-medium text-subtle">What I did</p>
-              <ul className="mt-2 space-y-2">
-                {p.contributions.map((c) => (
-                  <li key={c.text} className="flex gap-3 text-sm leading-relaxed text-muted">
-                    <span className="mt-[0.65em] h-px w-3 shrink-0 bg-fg/30" aria-hidden />
-                    <span className="text-pretty">
-                      {c.text}
-                      {c.ref ? (
-                        <>
-                          {' '}
-                          <a
-                            href={c.ref.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`Pull request ${c.ref.label}`}
-                            className="whitespace-nowrap text-xs text-fg/70 underline decoration-fg/20 underline-offset-4 hover:text-fg"
-                          >
-                            PR {c.ref.label}
-                          </a>
-                        </>
-                      ) : null}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <figure className="rounded-lg border hairline bg-bg/60 p-4">
-              <ProjectFigure kind={p.figure} />
-            </figure>
-          </div>
-        </Details>
       </div>
+      <Details className="mt-4">
+        <div className="space-y-5 border-t hairline pt-5">
+          <div>
+            <p className="text-xs font-medium text-subtle">Problem</p>
+            <p className="mt-1.5 text-pretty text-sm leading-relaxed text-muted">{p.problem}</p>
+          </div>
+          <div>
+            <p className="text-xs font-medium text-subtle">What I did</p>
+            <ul className="mt-2 space-y-2">
+              {p.contributions.map((c) => (
+                <li key={c.text} className="flex gap-3 text-sm leading-relaxed text-muted">
+                  <span className="mt-[0.65em] h-px w-3 shrink-0 bg-fg/30" aria-hidden />
+                  <span className="text-pretty">
+                    {c.text}
+                    {c.ref ? (
+                      <>
+                        {' '}
+                        <a
+                          href={c.ref.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Pull request ${c.ref.label}`}
+                          className="whitespace-nowrap text-xs text-fg/70 underline decoration-fg/20 underline-offset-4 hover:text-fg"
+                        >
+                          PR {c.ref.label}
+                        </a>
+                      </>
+                    ) : null}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <figure className="rounded-lg border hairline bg-bg/60 p-4">
+            <ProjectFigure kind={p.figure} />
+          </figure>
+        </div>
+      </Details>
     </article>
   );
 }
