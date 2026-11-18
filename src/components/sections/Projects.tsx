@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ArrowUpRight, Brain, Database, MessagesSquare, Network } from 'lucide-react';
 import { archive, builds, featured, type Build, type FeaturedProject, type Link } from '../../content/site';
 import { ProjectFigure } from '../figures/ProjectFigure';
@@ -156,7 +157,13 @@ function BuildRow({ b }: { b: Build }) {
   );
 }
 
+const ALL = 'All';
+const categories = [ALL, ...new Set(builds.map((b) => b.category))];
+
 export function Projects() {
+  const [filter, setFilter] = useState<string>(ALL);
+  const visible = filter === ALL ? builds : builds.filter((b) => b.category === filter);
+
   return (
     <Section id="work" label="Projects">
       <div className="space-y-4">
@@ -168,9 +175,26 @@ export function Projects() {
       </div>
 
       <Reveal className="mt-14">
-        <h3 className="text-sm font-medium text-muted">Other projects</h3>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h3 className="text-sm font-medium text-muted">Other projects</h3>
+          <div role="group" aria-label="Filter projects by category" className="-mx-1 flex gap-1 overflow-x-auto px-1">
+            {categories.map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setFilter(c)}
+                aria-pressed={filter === c}
+                className={`shrink-0 rounded-full border px-3 py-1 text-xs transition-colors ${
+                  filter === c ? 'border-fg bg-fg text-bg' : 'hairline-strong text-muted hover:text-fg'
+                }`}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        </div>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-          {builds.map((b) => (
+          {visible.map((b) => (
             <li key={b.title}>
               <BuildCard b={b} />
             </li>
