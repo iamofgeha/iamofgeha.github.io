@@ -419,16 +419,6 @@ export type Interest = { area: string; question: string; evidence?: Link };
 
 export const interests: Interest[] = [
   {
-    area: 'AI for scientific discovery',
-    question: 'How do we make machine-generated hypotheses traceable, reproducible and worth testing?',
-    evidence: { label: 'Hypothesis generation', href: '#work' },
-  },
-  {
-    area: 'Statistical genetics',
-    question: 'Fine-mapping, heritability partitioning and the data engineering that makes them trustworthy.',
-    evidence: { label: 'GWAS harmonisation', href: '#work' },
-  },
-  {
     area: 'Large language models',
     question: 'How attention, context and memory shape what a model can reason about.',
     evidence: {
@@ -442,12 +432,9 @@ export const interests: Interest[] = [
     evidence: { label: 'On ReAct', href: 'https://medium.com/@ofgehagelana2019/react-fed1fc167694' },
   },
   {
-    area: 'Human-in-the-loop learning',
-    question: 'Where human judgement adds the most information per label.',
-    evidence: {
-      label: 'On HITL',
-      href: 'https://medium.com/@ofgehagelana2019/what-is-human-in-the-loop-hitl-0bd1a3d2d889',
-    },
+    area: 'ML systems & MLOps',
+    question: 'What it takes to keep a model useful after deployment: reproducibility, monitoring and cost.',
+    evidence: { label: 'Fraud detection service', href: '#work' },
   },
   {
     area: 'Model evaluation & tuning',
@@ -458,9 +445,22 @@ export const interests: Interest[] = [
     },
   },
   {
+    area: 'Human-in-the-loop learning',
+    question: 'Where human judgement adds the most information per label.',
+    evidence: {
+      label: 'On HITL',
+      href: 'https://medium.com/@ofgehagelana2019/what-is-human-in-the-loop-hitl-0bd1a3d2d889',
+    },
+  },
+  {
     area: 'Neuro-symbolic reasoning',
     question: 'Combining learned representations with explicit logic, as explored in MeTTa.',
     evidence: { label: 'MettaLogic', href: 'https://github.com/Ofgeha-Gelana/MettaLogic' },
+  },
+  {
+    area: 'AI for science',
+    question: 'How to make machine-generated hypotheses traceable, reproducible and worth testing.',
+    evidence: { label: 'Research infrastructure', href: '#work' },
   },
   {
     area: 'Brain-inspired learning',
