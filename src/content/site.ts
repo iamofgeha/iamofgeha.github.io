@@ -479,18 +479,18 @@ export const stack: { group: string; items: string[] }[] = [
     items: ['PyTorch', 'TensorFlow', 'scikit-learn', 'Hugging Face Transformers', 'SHAP / LIME', 'YOLOv5'],
   },
   {
-    group: 'LLM engineering',
+    group: 'Generative AI & LLMs',
     items: ['Gemini API', 'OpenAI & Anthropic APIs', 'ChromaDB', 'SentenceTransformers', 'CrewAI', 'Streamlit'],
   },
   {
-    group: 'Backend & infrastructure',
-    items: ['Flask', 'FastAPI', 'Django', 'Docker Compose', 'PostgreSQL', 'MongoDB', 'Redis', 'MinIO'],
+    group: 'MLOps & backend',
+    items: ['Docker & Compose', 'CI/CD', 'FastAPI', 'Flask', 'Django', 'Model serving', 'MinIO'],
   },
   {
-    group: 'Scientific computing',
-    items: ['Nextflow', 'Galaxy', 'GWASLab', 'SuSiE', 'LDSC', 'Open Targets', 'CellxGene Census', 'BioCypher'],
+    group: 'Data engineering',
+    items: ['ETL pipelines', 'PostgreSQL', 'MongoDB', 'Redis', 'DBT', 'Nextflow', 'Pandas & NumPy'],
   },
-  { group: 'Data & tooling', items: ['Pandas', 'NumPy', 'DBT', 'Jupyter', 'Git', 'Linux'] },
+  { group: 'Tooling', items: ['Git', 'Linux', 'Jupyter'] },
 ];
 
 /* ------------------------------------------------------------------ */
