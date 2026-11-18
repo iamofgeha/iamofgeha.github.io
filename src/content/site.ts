@@ -128,14 +128,13 @@ export const experience: Experience[] = [
   {
     org: 'Ethiopian Artificial Intelligence Institute',
     role: 'AI Researcher & Developer',
-    period: '2023 — Present',
-    review: 'Dates from the CV. If this role has ended, set the end year; add public projects or outcomes if you can.',
+    period: '2023 — Jul 2024',
     summary:
-      'Research and development of AI software, from model work to integrating machine-learning models into production applications.',
+      'Research on machine-learning algorithms and AI systems, and development of experimental models for complex datasets.',
     highlights: [
-      'Design and implement AI software, integrating ML models into applications.',
-      'Develop AI products with TensorFlow and PyTorch.',
-      'Deploy ML models to production with attention to reliability and scalability.',
+      'Conducted research on ML algorithms and AI systems, and contributed to technical research discussions.',
+      'Developed experimental models with TensorFlow and PyTorch.',
+      'Collaborated on AI solutions for complex datasets and on integrating models into applications.',
     ],
     stack: ['Python', 'PyTorch', 'TensorFlow'],
   },
