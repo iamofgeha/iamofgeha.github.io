@@ -2,15 +2,23 @@ import { useId, useState, type ReactNode } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
-type Props = { children: ReactNode; label?: string; className?: string };
+type Props = {
+  children: ReactNode;
+  label?: string;
+  className?: string;
+  /** Rendered on the same line, before the toggle (e.g. project links). */
+  actions?: ReactNode;
+};
 
 /** "Details" disclosure: keeps the page brief and the depth one click away. */
-export function Details({ children, label = 'Details', className = '' }: Props) {
+export function Details({ children, label = 'Details', className = '', actions }: Props) {
   const [open, setOpen] = useState(false);
   const id = useId();
   return (
     <div className={className}>
-      <button
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+        {actions}
+        <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
@@ -23,7 +31,8 @@ export function Details({ children, label = 'Details', className = '' }: Props) 
           aria-hidden
           className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
         />
-      </button>
+        </button>
+      </div>
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
