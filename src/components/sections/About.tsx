@@ -1,3 +1,4 @@
+import portraitSmall from '../../assets/images/portrait-640.webp';
 import portrait from '../../assets/images/portrait.webp';
 import { about, profile } from '../../content/site';
 import { Reveal } from '../ui/Reveal';
@@ -30,12 +31,14 @@ export function About() {
           <figure className="overflow-hidden rounded-2xl border hairline bg-surface">
             <img
               src={portrait}
+              srcSet={`${portraitSmall} 640w, ${portrait} 1000w`}
+              sizes="(min-width: 768px) 34vw, 100vw"
               alt={`Portrait of ${profile.name}`}
               width={1000}
               height={1250}
               loading="lazy"
               decoding="async"
-              className="aspect-[4/5] w-full object-cover grayscale-[15%] transition-[filter] duration-700 hover:grayscale-0"
+              className="aspect-[4/5] w-full object-cover"
             />
           </figure>
           <dl className="mt-6 divide-y divide-hairline border-y hairline text-sm">
