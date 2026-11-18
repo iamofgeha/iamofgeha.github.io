@@ -29,9 +29,9 @@ src/
   content/site.ts          # single source of truth for content
   components/
     layout/                # Nav (desktop + mobile sheet), Footer
-    sections/              # Hero, About, Experience, Projects, Research, Writing, Contact
-    figures/               # SVG schematics (hero signal graph, project figures)
-    ui/                    # Section shell, Reveal, Button, brand icons
+    sections/              # Hero, About, Experience, Projects, Skills, Credentials, Writing, Contact
+    figures/               # SVG project schematics (shown inside project details)
+    ui/                    # Section shell, Details disclosure, Reveal, Button, brand icons
   hooks/                   # theme, active section, scroll state
 public/                    # CV, favicon, OG image, robots, sitemap
 ```
@@ -39,7 +39,8 @@ public/                    # CV, favicon, OG image, robots, sitemap
 ## Design notes
 
 - Dark-first with a light theme. Colours are CSS variables in `src/index.css`, exposed to Tailwind as `bg`, `surface`, `fg`, `muted`, `accent` and so on.
-- Type: Geist (UI), Instrument Serif (italic accents), Geist Mono (labels).
+- Simple single-column layout. Summaries stay on the page; depth sits behind "Details" toggles.
+- Type: Geist, with Geist Mono for small tags.
 - Motion is short and runs once. `prefers-reduced-motion` is respected through `MotionConfig` and CSS.
 
 ## Deploy (free on GitHub Pages)
