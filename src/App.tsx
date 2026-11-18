@@ -8,7 +8,7 @@ import { Credentials } from './components/sections/Credentials';
 import { Experience } from './components/sections/Experience';
 import { Hero } from './components/sections/Hero';
 import { Projects } from './components/sections/Projects';
-import { Research } from './components/sections/Research';
+import { Skills } from './components/sections/Skills';
 import { Writing } from './components/sections/Writing';
 
 export default function App() {
@@ -30,7 +30,7 @@ export default function App() {
           <About />
           <Experience />
           <Projects />
-          <Research />
+          <Skills />
           <Credentials />
           <Writing />
           <Contact />
