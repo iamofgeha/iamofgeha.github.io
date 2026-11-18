@@ -90,9 +90,6 @@
     border-color: rgb(var(--line) / var(--line-alpha));
   }
 
-  .eyebrow {
-    @apply font-mono text-[0.72rem] uppercase tracking-[0.14em] text-subtle;
-  }
 
   .container-page {
     @apply mx-auto w-full max-w-3xl px-5 sm:px-8;
@@ -104,17 +101,6 @@
     background: rgb(var(--line) / calc(var(--line-alpha) * 0.35));
   }
 
-  .link-underline {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-size: 0% 1px;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .link-underline:hover,
-  .link-underline:focus-visible {
-    background-size: 100% 1px;
-  }
 }
 
 @layer utilities {
