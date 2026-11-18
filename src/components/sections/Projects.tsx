@@ -21,64 +21,78 @@ function ExtLink({ link }: { link: Link }) {
 
 function FeaturedCard({ p }: { p: FeaturedProject }) {
   return (
-    <article aria-labelledby={`${p.id}-title`} className="rounded-xl border hairline bg-surface/40 p-6 sm:p-7">
-      <p className="text-xs text-subtle">{p.context}</p>
-      <h3 id={`${p.id}-title`} className="mt-2 text-lg font-semibold tracking-tight">
-        {p.title}
-      </h3>
-      <p className="mt-2 text-pretty text-sm leading-relaxed text-muted">{p.summary}</p>
-
-      <div className="mt-4 flex flex-wrap gap-1.5">
-        {p.stack.map((s) => (
-          <span key={s} className="chip">
-            {s}
-          </span>
-        ))}
-      </div>
-
-      <Details
-        className="mt-5"
-        actions={p.links.map((l) => (
-          <ExtLink key={l.href} link={l} />
-        ))}
+    <article
+      aria-labelledby={`${p.id}-title`}
+      className="overflow-hidden rounded-xl border hairline bg-surface/40 transition-colors hover:border-fg/20"
+    >
+      <figure
+        className="border-b hairline bg-bg/50 px-5 py-5 sm:px-8"
+        style={{
+          backgroundImage: 'radial-gradient(rgb(var(--line) / calc(var(--line-alpha) * 1.3)) 1px, transparent 1px)',
+          backgroundSize: '16px 16px',
+        }}
       >
-        <div className="space-y-5 border-t hairline pt-5">
-          <div>
-            <p className="text-xs font-medium text-subtle">Problem</p>
-            <p className="mt-1.5 text-pretty text-sm leading-relaxed text-muted">{p.problem}</p>
-          </div>
-          <div>
-            <p className="text-xs font-medium text-subtle">What I did</p>
-            <ul className="mt-2 space-y-2">
-              {p.contributions.map((c) => (
-                <li key={c.text} className="flex gap-3 text-sm leading-relaxed text-muted">
-                  <span className="mt-[0.65em] h-px w-3 shrink-0 bg-fg/30" aria-hidden />
-                  <span className="text-pretty">
-                    {c.text}
-                    {c.ref ? (
-                      <>
-                        {' '}
-                        <a
-                          href={c.ref.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`Pull request ${c.ref.label}`}
-                          className="whitespace-nowrap text-xs text-fg/70 underline decoration-fg/20 underline-offset-4 hover:text-fg"
-                        >
-                          PR {c.ref.label}
-                        </a>
-                      </>
-                    ) : null}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <figure className="rounded-lg border hairline bg-bg/60 p-4">
-            <ProjectFigure kind={p.figure} />
-          </figure>
+        <div className="mx-auto max-w-[440px]">
+          <ProjectFigure kind={p.figure} />
         </div>
-      </Details>
+      </figure>
+
+      <div className="p-6 sm:p-7">
+        <p className="text-xs text-subtle">{p.context}</p>
+        <h3 id={`${p.id}-title`} className="mt-2 text-lg font-semibold tracking-tight">
+          {p.title}
+        </h3>
+        <p className="mt-2 text-pretty text-sm leading-relaxed text-muted">{p.summary}</p>
+
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {p.stack.map((s) => (
+            <span key={s} className="chip">
+              {s}
+            </span>
+          ))}
+        </div>
+
+        <Details
+          className="mt-5"
+          actions={p.links.map((l) => (
+            <ExtLink key={l.href} link={l} />
+          ))}
+        >
+          <div className="space-y-5 border-t hairline pt-5">
+            <div>
+              <p className="text-xs font-medium text-subtle">Problem</p>
+              <p className="mt-1.5 text-pretty text-sm leading-relaxed text-muted">{p.problem}</p>
+            </div>
+            <div>
+              <p className="text-xs font-medium text-subtle">What I did</p>
+              <ul className="mt-2 space-y-2">
+                {p.contributions.map((c) => (
+                  <li key={c.text} className="flex gap-3 text-sm leading-relaxed text-muted">
+                    <span className="mt-[0.65em] h-px w-3 shrink-0 bg-fg/30" aria-hidden />
+                    <span className="text-pretty">
+                      {c.text}
+                      {c.ref ? (
+                        <>
+                          {' '}
+                          <a
+                            href={c.ref.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Pull request ${c.ref.label}`}
+                            className="whitespace-nowrap text-xs text-fg/70 underline decoration-fg/20 underline-offset-4 hover:text-fg"
+                          >
+                            PR {c.ref.label}
+                          </a>
+                        </>
+                      ) : null}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Details>
+      </div>
     </article>
   );
 }
