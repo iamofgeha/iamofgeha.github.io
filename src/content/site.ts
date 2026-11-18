@@ -86,16 +86,13 @@ export const experience: Experience[] = [
     period: 'May 2025 — Present',
     // Highlights are taken from pull requests to github.com/rejuve-bio.
     summary:
-      'Engineering the data and compute layer of an AI system that generates hypotheses about how genetic variants affect phenotypes, combining GWAS, fine-mapping, enrichment analysis and LLM summarisation.',
+      'Data and ML infrastructure for an AI system that generates biological hypotheses from genetic data and summarises the evidence with LLMs.',
     highlights: [
-      'Integrated Open Targets so the pipeline reuses published fine-mapped credible sets and pre-harmonised studies, skipping SuSiE fine-mapping and Nextflow harmonisation when upstream results already exist.',
-      'Replaced fragile, profile-gated loaders with a bootstrap service that loads a pinned Open Targets release on every deploy, before workers start.',
-      'Added per-analysis provenance that records the Open Targets release each result was built on.',
-      'Removed a pipeline bottleneck by caching CellxGene Census co-expression matrices per tissue instead of re-downloading them for every gene.',
-      'Parallelised the GWAS summary-statistics harmoniser per chromosome, and built GWASLab harmonisation, liftover and rsID-assignment workflows on hg38 references.',
-      'Moved the API layer from global mutable state to a dependency-injection container to make it safer to start and easier to test.',
+      'Integrated Open Targets as a pre-computed data source, so the pipeline skips expensive fine-mapping and harmonisation when results already exist.',
+      'Made deployments reproducible: a bootstrap service loads a pinned data release before workers start, and every analysis records the release it used.',
+      'Removed pipeline bottlenecks with per-tissue caching, per-chromosome parallelism and a dependency-injection refactor of the API layer.',
     ],
-    stack: ['Python', 'Flask', 'PostgreSQL', 'MongoDB', 'MinIO', 'Docker Compose', 'Nextflow', 'Galaxy'],
+    stack: ['Python', 'Flask', 'PostgreSQL', 'MinIO', 'Docker Compose', 'Nextflow'],
     link: { label: 'github.com/rejuve-bio', href: 'https://github.com/rejuve-bio' },
   },
   {
