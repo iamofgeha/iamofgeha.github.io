@@ -65,37 +65,6 @@ const Defs = () => {
   );
 };
 
-function Hypothesis() {
-  return (
-    <>
-      <Box x={20} y={30} w={120} label="gwas study" />
-      <Box x={20} y={95} w={120} label="credible sets" />
-      <Box x={20} y={160} w={120} label="enrichment" />
-      <Box x={20} y={225} w={120} label="knowledge base" />
-      <Arrow d="M80 60V93" />
-      <Arrow d="M80 125V158" />
-
-      <Box x={176} y={160} w={130} label="co-expression" accent />
-      <Label x={241} y={152} anchor="middle">cached per tissue</Label>
-      <Arrow d="M140 175H174" accent />
-
-      {[45, 110, 175, 240].map((y) => (
-        <path key={y} d={`M140 ${y} C 300 ${y}, 300 128, 344 128`} fill="none" className="stroke-fg/15" />
-      ))}
-      <path d="M306 175 C 326 175, 326 128, 344 128" fill="none" className="stroke-accent" strokeWidth={1.4} />
-
-      <rect x={344} y={98} width={136} height={60} rx={12} className="fill-fg/[0.04] stroke-fg/30" />
-      <Label x={412} y={124} anchor="middle" strong>llm summary</Label>
-      <Label x={412} y={142} anchor="middle">evidence → text</Label>
-      <Arrow d="M412 158V214" />
-      <rect x={350} y={216} width={124} height={34} rx={17} className="fill-fg" />
-      <text x={412} y={237} textAnchor="middle" className="fill-bg font-mono text-[10.5px] font-medium">
-        hypothesis
-      </text>
-    </>
-  );
-}
-
 function OpenTargets() {
   return (
     <>
@@ -123,44 +92,6 @@ function OpenTargets() {
       <Label x={30} y={241}>provenance</Label>
       <Label x={30} y={254} strong>ot_release pinned</Label>
       <path d="M140 244 H 158" className="stroke-fg/25" strokeDasharray="2 3" />
-    </>
-  );
-}
-
-function Harmonise() {
-  const chroms = Array.from({ length: 22 }, (_, i) => i);
-  return (
-    <>
-      <Label x={20} y={30} strong>before</Label>
-      <Label x={70} y={30}>one sequential run</Label>
-      {chroms.map((i) => (
-        <rect key={`a${i}`} x={20 + i * 20.5} y={42} width={18} height={10} rx={2} className="fill-fg/20" />
-      ))}
-
-      <Label x={20} y={92} strong>after</Label>
-      <Label x={70} y={92}>one job per chromosome</Label>
-      {chroms.map((i) => (
-        <g key={`b${i}`}>
-          <rect
-            x={20 + (i % 11) * 41}
-            y={104 + Math.floor(i / 11) * 18}
-            width={36}
-            height={10}
-            rx={2}
-            className="fill-accent/70 transition-opacity duration-500 group-hover:opacity-100"
-            opacity={0.85}
-          />
-        </g>
-      ))}
-
-      <Box x={20} y={186} w={100} label="sumstats" />
-      <Arrow d="M120 201H146" />
-      <Box x={148} y={186} w={90} label="liftover" />
-      <Arrow d="M238 201H264" />
-      <Box x={266} y={186} w={80} label="rsid" />
-      <Arrow d="M346 201H372" accent />
-      <Box x={374} y={186} w={106} label="hg38 aligned" accent />
-      <Label x={20} y={250}>strand · allele orientation · build checked against reference</Label>
     </>
   );
 }
@@ -237,9 +168,7 @@ function Memory() {
 }
 
 const titles: Record<FigureKind, string> = {
-  hypothesis: 'Pipeline schematic: evidence sources feed an LLM summary that produces a hypothesis; co-expression is cached per tissue.',
   opentargets: 'Decision flow: if a study is in Open Targets its credible set is reused, otherwise it is harmonised and fine-mapped with SuSiE.',
-  harmonise: 'Harmonisation: chromosomes processed as parallel jobs, then liftover and rsID assignment to an hg38-aligned output.',
   fraud: 'Fraud detection pipeline: engineered transaction features feed a classifier; SHAP and LIME explain each prediction, served by a Dockerised Flask API and a Dash dashboard.',
   memory: 'LLM memory flow: if a similar question was answered before, reuse it without a model call; otherwise build context from Redis session history and Chroma vector search, then call Gemini.',
 };
@@ -249,9 +178,7 @@ export function ProjectFigure({ kind }: { kind: FigureKind }) {
     <Ns.Provider value={kind}>
       <svg viewBox="0 0 500 280" className="h-auto w-full" role="img" aria-label={titles[kind]}>
         <Defs />
-        {kind === 'hypothesis' && <Hypothesis />}
         {kind === 'opentargets' && <OpenTargets />}
-        {kind === 'harmonise' && <Harmonise />}
         {kind === 'fraud' && <Fraud />}
         {kind === 'memory' && <Memory />}
       </svg>

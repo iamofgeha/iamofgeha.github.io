@@ -186,7 +186,7 @@ export const certifications = {
 /* Projects                                                            */
 /* ------------------------------------------------------------------ */
 
-export type FigureKind = 'hypothesis' | 'opentargets' | 'harmonise' | 'fraud' | 'memory';
+export type FigureKind = 'fraud' | 'memory' | 'opentargets';
 
 export type Contribution = { text: string; ref?: Link };
 
