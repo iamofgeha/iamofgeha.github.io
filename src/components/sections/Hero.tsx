@@ -35,7 +35,7 @@ export function Hero() {
               {profile.name}
             </h1>
             <p className="text-sm text-muted">
-              {profile.role} · {profile.location.split(',')[0]}
+              {profile.role} <span className="whitespace-nowrap">· {profile.location.split(',')[0]}</span>
             </p>
           </div>
         </motion.div>
