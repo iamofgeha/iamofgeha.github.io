@@ -2,7 +2,8 @@
  * All portfolio content lives here. Components only render it.
  *
  * Sources used (nothing else was assumed):
- *  - public/Ofgeha-Gelana-CV.pdf
+ *  - public/Ofgeha-Gelana-CV.pdf (current resume) and an earlier CV
+ *  - Role dates confirmed directly by Ofgeha
  *  - GitHub profile README, repository READMEs and pull requests on github.com/Ofgeha-Gelana
  *    and github.com/rejuve-bio
  *  - Medium articles at medium.com/@ofgehagelana2019
@@ -22,7 +23,7 @@ export const profile = {
   role: 'AI/ML Engineer & Researcher',
   location: 'Addis Ababa, Ethiopia',
   email: 'ofgehagelana2019@gmail.com', // from the CV
-  cv: 'Ofgeha-Gelana-CV.pdf', // in /public. review: the CV still says "Python Django developer"; refresh it.
+  cv: 'Ofgeha-Gelana-CV.pdf', // in /public
   headline: ['Building intelligent systems.', 'Exploring the science behind AI.'],
   intro:
     'I’m an AI/ML engineer and researcher. Most of my time goes into research infrastructure for AI-driven hypothesis generation in human genetics: the pipelines that take GWAS data through harmonisation, fine-mapping and enrichment, and hand the evidence to language models that propose testable biological hypotheses.',
@@ -59,7 +60,7 @@ export const about = {
   ],
   facts: [
     { label: 'Based in', value: 'Addis Ababa, Ethiopia' },
-    { label: 'Education', value: 'BSc Computer Science & Engineering, ASTU' },
+    { label: 'Education', value: 'BSc Computer Science & Engineering, ASTU · 3.8 GPA' },
     { label: 'Focus', value: 'ML systems · LLMs · Statistical genetics' },
     { label: 'Languages', value: 'English · Amharic · Afaan Oromo' },
   ],
@@ -161,11 +162,27 @@ export const experience: Experience[] = [
   },
 ];
 
-export const education = {
-  school: 'Adama Science and Technology University',
-  degree: 'BSc, Computer Science and Engineering',
-  period: '2019 — 2023',
-  note: 'GPA 3.8 / 4.0',
+export type Education = { school: string; credential: string; period?: string; note?: string };
+
+export const education: Education[] = [
+  {
+    school: 'Adama Science and Technology University',
+    credential: 'BSc, Computer Science and Engineering',
+    period: '2019 — 2023',
+    note: 'GPA 3.8 / 4.0',
+  },
+  { school: '10 Academy', credential: 'Kifiya AI Mastery training program' },
+  { school: 'WorldQuant University', credential: 'Graduate Certificate, Applied Data Science Lab' },
+];
+
+export const certifications = {
+  issuer: 'Coursera',
+  items: [
+    'Machine Learning Specialization',
+    'Deep Learning Specialization',
+    'Mathematics for Machine Learning and Data Science Specialization',
+    'Natural Language Processing Specialization',
+  ],
 };
 
 /* ------------------------------------------------------------------ */
