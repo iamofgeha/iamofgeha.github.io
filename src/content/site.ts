@@ -169,7 +169,7 @@ export const experience: Experience[] = [
     logo: insaLogo,
     short: 'INSA',
     role: 'Python Django Developer · Intern',
-    period: '2022 — 2023',
+    period: 'Jul 2022 — Jan 2023',
     summary: 'Backend engineering on Django applications in an Agile team.',
     highlights: [
       'Designed backend systems with Django and RESTful APIs, including database optimisation.',
