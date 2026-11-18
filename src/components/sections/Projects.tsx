@@ -166,10 +166,10 @@ export function Projects() {
       label="Selected work"
       title={
         <>
-          Systems built for research, <Em>engineered to be relied on.</Em>
+          Machine learning, <Em>engineered to be relied on.</Em>
         </>
       }
-      intro="Three pieces of research infrastructure I work on, each linked to the pull requests behind it, followed by independent builds where I take an idea apart and put it back together."
+      intro="Three systems that show how I work, from production ML to generative AI to research infrastructure, followed by independent builds where I take an idea apart and put it back together."
     >
       <div className="space-y-6 sm:space-y-8">
         {featured.map((p) => (
