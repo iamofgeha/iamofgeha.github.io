@@ -41,14 +41,14 @@ export function Contact() {
             id="contact-heading"
             className="mt-8 max-w-4xl text-balance text-[2.5rem] font-medium leading-[1.02] tracking-tightest sm:text-6xl lg:text-7xl"
           >
-            Working on something at the edge of AI and science? <span className="font-serif font-normal italic text-muted">Let’s talk.</span>
+            Building something with machine learning? <span className="font-serif font-normal italic text-muted">Let’s talk.</span>
           </h2>
         </Reveal>
 
         <Reveal delay={0.1}>
           <p className="mt-8 max-w-xl text-pretty text-lg leading-relaxed text-muted">
-            I’m glad to hear about research collaborations, ML engineering roles, and problems where careful data engineering
-            and machine learning meet.
+            I’m open to ML engineering roles, research collaborations, and hard problems where data, models and
+            production systems meet.
           </p>
         </Reveal>
 
