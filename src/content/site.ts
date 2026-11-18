@@ -211,100 +211,82 @@ const pr = (repo: string, n: number): Link => ({
 
 export const featured: FeaturedProject[] = [
   {
-    id: 'hypothesis-generation',
+    id: 'fraud-detection',
     index: '01',
-    context: 'Rejuve Bio · Research system',
-    title: 'AI-powered hypothesis generation',
+    context: 'Independent project · Applied ML & MLOps',
+    title: 'Explainable fraud detection service',
     summary:
-      'A system that proposes causal hypotheses linking genetic variants to phenotypes. It combines GWAS data, fine-mapping, enrichment analysis and a knowledge base, then uses a large language model to summarise the evidence into a hypothesis.',
+      'An end-to-end fraud-detection system for e-commerce and banking transactions: feature engineering, model selection, per-prediction explanations, and a containerised API with a monitoring dashboard.',
     problem:
-      'Moving from a GWAS association to a plausible mechanism means chaining many slow, heterogeneous tools. A useful hypothesis has to be both fast to produce and traceable to the evidence behind it.',
+      'Fraud is rare and costly. A model that flags transactions also has to explain each decision so analysts can trust and act on it, and it has to run as a service, not as a notebook.',
     contributions: [
-      {
-        text: 'Found the remaining bottleneck in enrichment, a full CellxGene Census download per gene, and cached co-expression matrices per tissue.',
-        ref: pr('hypothesis-generation-demo', 89),
-      },
-      {
-        text: 'Replaced a global dependency pattern with a dependency-injection container using thread-safe singletons.',
-        ref: pr('hypothesis-generation-demo', 66),
-      },
-      {
-        text: 'Extracted shared GWAS download and caching helpers so pipeline stages stop duplicating logic.',
-        ref: pr('hypothesis-generation-demo', 114),
-      },
+      { text: 'Merged transaction data with IP-to-country mapping and engineered geolocation and transaction-pattern features.' },
+      { text: 'Trained and compared several model families, then interpreted them globally and per prediction with SHAP and LIME.' },
+      { text: 'Served the model through a Flask API in Docker, with logging for monitoring.' },
+      { text: 'Built a Dash dashboard that turns predictions into fraud insights for non-technical users.' },
     ],
-    stack: ['Python', 'Flask', 'MongoDB', 'LLMs', 'CellxGene Census', 'Docker'],
+    stack: ['Python', 'scikit-learn', 'SHAP', 'LIME', 'Flask', 'Docker', 'Dash'],
     links: [
-      { label: 'Repository', href: 'https://github.com/rejuve-bio/hypothesis-generation-demo' },
+      { label: 'Repository', href: 'https://github.com/Ofgeha-Gelana/FraudDetect-AI' },
+      {
+        label: 'Write-up',
+        href: 'https://medium.com/@ofgehagelana2019/fraud-detection-system-for-e-commerce-and-banking-transactions-2d37cf020d51',
+      },
     ],
-    figure: 'hypothesis',
+    figure: 'fraud',
   },
   {
-    id: 'opentargets',
+    id: 'llm-memory',
     index: '02',
-    context: 'Rejuve Bio · Data integration',
-    title: 'Open Targets integration & provenance',
+    context: 'Independent project · Generative AI',
+    title: 'Context-memory LLM assistant',
     summary:
-      'A fast path that lets the pipeline reuse Open Targets’ published credible sets and pre-harmonised studies, a reliable loader for that data, and a record of exactly which release every analysis used.',
+      'A Gemini-powered chat assistant with two memory strategies: Redis for fast session history, and ChromaDB vector search for semantic recall of earlier conversations.',
     problem:
-      'The pipeline always re-ran harmonisation and SuSiE fine-mapping, even for studies Open Targets had already processed. That wasted compute and could disagree with canonical results. Once a new release was deployed, nothing recorded which data older results were built on.',
+      'LLM calls are stateless and billed per token. An assistant needs memory that is fast, relevant to the current question, and doesn’t pay twice for answers it has already given.',
+    contributions: [
+      { text: 'Session memory in Redis for immediate recall of the full conversation.' },
+      { text: 'Semantic memory with SentenceTransformers embeddings in ChromaDB, retrieving only the context relevant to the new question.' },
+      { text: 'Checks conversation history before calling the model, avoiding redundant Gemini calls.' },
+      { text: 'Two Streamlit apps that make the trade-offs between the strategies easy to compare.' },
+    ],
+    stack: ['Python', 'Gemini', 'Redis', 'ChromaDB', 'SentenceTransformers', 'Streamlit'],
+    links: [{ label: 'Repository', href: 'https://github.com/Ofgeha-Gelana/Ai-chatbot-context' }],
+    figure: 'memory',
+  },
+  {
+    id: 'research-infra',
+    index: '03',
+    context: 'Rejuve Bio · ML infrastructure',
+    title: 'Data infrastructure for AI-driven hypothesis generation',
+    summary:
+      'Reliability and performance work on a research system that turns genetic association data into evidence-backed hypotheses, summarised by LLMs.',
+    problem:
+      'The pipeline recomputed expensive steps that a trusted public source had already published, and results couldn’t be traced back to the data release they were built on.',
     contributions: [
       {
-        text: 'Query Open Targets credible sets over Postgres and fall back to SuSiE only when none exist.',
+        text: 'Reuse published Open Targets results and fall back to in-house fine-mapping only when none exist.',
         ref: pr('hypothesis-generation-demo', 78),
       },
       {
-        text: 'Skip the Nextflow harmoniser for studies confirmed in Open Targets’ study index. The change is purely additive, and downstream validation still runs.',
-        ref: pr('hypothesis-generation-demo', 84),
-      },
-      {
-        text: 'A single bootstrap service loads a pinned release on every deploy, restores validated snapshots from MinIO, and gates workers on success.',
+        text: 'A bootstrap service loads a pinned data release on every deploy and gates workers on success.',
         ref: pr('hypothesis-generation-demo', 99),
       },
       {
-        text: 'Each project records its Open Targets study, release and load time, exposed through the API.',
+        text: 'Every analysis records the data release it used, exposed through the API.',
         ref: pr('hypothesis-generation-demo', 105),
       },
       {
-        text: 'A content-addressed MinIO store for precomputed LDSC results, now the slowest remaining step (in progress).',
-        ref: pr('hypothesis-generation-demo', 115),
+        text: 'Per-tissue caching and per-chromosome parallelism removed the main pipeline bottlenecks.',
+        ref: pr('hypothesis-generation-demo', 89),
       },
     ],
-    stack: ['Open Targets', 'PostgreSQL', 'MinIO', 'SuSiE', 'LDSC', 'Docker Compose'],
+    stack: ['Python', 'PostgreSQL', 'MinIO', 'Docker Compose', 'Nextflow', 'Open Targets'],
     links: [
       { label: 'Repository', href: 'https://github.com/rejuve-bio/hypothesis-generation-demo' },
+      { label: 'Harmoniser', href: 'https://github.com/rejuve-bio/gwas-sumstats-harmoniser' },
     ],
     figure: 'opentargets',
-  },
-  {
-    id: 'gwas-harmonisation',
-    index: '03',
-    context: 'Rejuve Bio · Statistical genetics',
-    title: 'GWAS summary-statistics harmonisation',
-    summary:
-      'Workflows that bring GWAS summary statistics from different studies onto a common genome build, strand and allele orientation, so downstream fine-mapping and LDSC can trust their inputs.',
-    problem:
-      'Summary statistics arrive on different builds and conventions. Harmonisation is a prerequisite for everything downstream, and the existing harmoniser processed every chromosome sequentially on one core.',
-    contributions: [
-      {
-        text: 'Restructured the harmoniser so each chromosome runs as an independent, parallel job, and optimised reference matching.',
-        ref: pr('gwas-sumstats-harmoniser', 5),
-      },
-      {
-        text: 'Built a GWASLab harmonisation workflow for Galaxy, with tests.',
-        ref: pr('galaxy-gwas-tools', 94),
-      },
-      {
-        text: 'Added liftover and rsID assignment against local hg38 population references, and fixed invalid base-pair edge cases.',
-        ref: pr('galaxy-gwas-tools', 37),
-      },
-    ],
-    stack: ['Python', 'Nextflow', 'Galaxy', 'GWASLab', 'hg38'],
-    links: [
-      { label: 'Harmoniser', href: 'https://github.com/rejuve-bio/gwas-sumstats-harmoniser' },
-      { label: 'Galaxy tools', href: 'https://github.com/rejuve-bio/galaxy-gwas-tools' },
-    ],
-    figure: 'harmonise',
   },
 ];
 
@@ -321,15 +303,7 @@ export type Build = {
 
 /** Year = last active year of the repository on GitHub. */
 export const builds: Build[] = [
-  {
-    title: 'Context-memory LLM chat',
-    category: 'LLM systems',
-    year: '2025',
-    description:
-      'Two approaches to conversational memory compared side by side: Redis for session persistence and ChromaDB vector search for semantic recall, with history checks to avoid redundant model calls.',
-    stack: ['Gemini', 'ChromaDB', 'Redis', 'SentenceTransformers'],
-    repo: 'https://github.com/Ofgeha-Gelana/Ai-chatbot-context',
-  },
+
   {
     title: 'Amharic NER for e-commerce',
     category: 'Machine learning',
@@ -349,17 +323,7 @@ export const builds: Build[] = [
     repo: 'https://github.com/Ofgeha-Gelana/HITL-Spam-Classifier',
     writeup: 'https://medium.com/@ofgehagelana2019/what-is-human-in-the-loop-hitl-0bd1a3d2d889',
   },
-  {
-    title: 'Explainable fraud detection',
-    category: 'Machine learning',
-    year: '2025',
-    description:
-      'Fraud detection for e-commerce and banking transactions with geolocation features, SHAP and LIME explanations, a Dockerised Flask API with logging, and a Dash dashboard.',
-    stack: ['scikit-learn', 'SHAP', 'LIME', 'Flask', 'Docker'],
-    repo: 'https://github.com/Ofgeha-Gelana/FraudDetect-AI',
-    writeup:
-      'https://medium.com/@ofgehagelana2019/fraud-detection-system-for-e-commerce-and-banking-transactions-2d37cf020d51',
-  },
+
   {
     title: 'AI Study Genie',
     category: 'LLM systems',
