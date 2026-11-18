@@ -117,10 +117,7 @@ export function Hero() {
           className="mt-20 flex flex-col gap-4 border-t hairline py-6 text-sm sm:mt-28 sm:flex-row sm:items-center sm:justify-between"
         >
           <p className="flex items-center gap-3 text-muted">
-            <span className="relative flex h-2 w-2" aria-hidden>
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-50 [animation-iteration-count:3]" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-            </span>
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
             <span className="eyebrow text-fg">{profile.current.label}</span>
             <span className="text-pretty">{profile.current.text}</span>
           </p>
