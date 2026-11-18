@@ -26,10 +26,10 @@ export const profile = {
   cv: 'Ofgeha-Gelana-CV.pdf', // in /public
   headline: ['Building intelligent systems.', 'Exploring the science behind AI.'],
   intro:
-    'I’m an AI/ML engineer and researcher. Most of my time goes into research infrastructure for AI-driven hypothesis generation in human genetics: the pipelines that take GWAS data through harmonisation, fine-mapping and enrichment, and hand the evidence to language models that propose testable biological hypotheses.',
+    'I’m an AI/ML engineer and researcher. I design, build and deploy machine-learning systems end to end, from data pipelines and model training to APIs in production, with a growing focus on LLMs and generative AI. My work has spanned AI research, banking and the life sciences.',
   current: {
     label: 'Currently',
-    text: 'Integrating Open Targets into a hypothesis-generation pipeline at Rejuve Bio',
+    text: 'AI/ML Engineer at Rejuve Bio · AI Researcher at SingularityNET',
   },
   social: {
     github: 'https://github.com/Ofgeha-Gelana',
@@ -41,17 +41,17 @@ export const profile = {
 export const about = {
   paragraphs: [
     'I came to AI through software engineering: backend systems in Django, then machine learning, then the harder question of how intelligent systems actually work. That path shaped how I work. I care about the model, and just as much about the data it sees, the infrastructure that runs it, and whether its output can be traced back to evidence.',
-    'Today that means building the plumbing behind AI-assisted research in statistical genetics: harmonising GWAS summary statistics, reusing Open Targets fine-mapped credible sets, removing pipeline bottlenecks, and recording provenance so every generated hypothesis can be traced back to the exact data release it came from.',
-    'Alongside that I build smaller systems to understand ideas properly: context-aware LLM applications, human-in-the-loop learning, symbolic reasoning in MeTTa, and model explainability. I write about what I learn, from transformer internals to agent patterns like ReAct.',
+    'I’ve applied that across very different settings: predictive models and ML-backed services at a bank, research on learning algorithms at a national AI institute, and data and compute infrastructure for AI-assisted research in the SingularityNET ecosystem. The domain changes; the discipline of clean data, honest evaluation and reliable deployment doesn’t.',
+    'Alongside that I build smaller systems to understand ideas properly: context-aware LLM applications, human-in-the-loop learning, explainable models and symbolic reasoning. I write about what I learn, from transformer internals to agent patterns like ReAct.',
   ],
   principles: [
     {
       title: 'Evidence before output',
-      body: 'A result is only as useful as the provenance behind it. I record what data, release and method produced each answer.',
+      body: 'A prediction is only as useful as what it can be traced back to. I keep data, versions and evaluation explicit.',
     },
     {
-      title: 'Reuse what is already known',
-      body: 'If a trusted upstream source has already done the computation, use it. Spend compute where it adds information.',
+      title: 'Production is the point',
+      body: 'A model that never leaves the notebook hasn’t solved anything. I design for serving, monitoring and change from the start.',
     },
     {
       title: 'Understand, then scale',
@@ -61,7 +61,7 @@ export const about = {
   facts: [
     { label: 'Based in', value: 'Addis Ababa, Ethiopia' },
     { label: 'Education', value: 'BSc Computer Science & Engineering, ASTU · 3.8 GPA' },
-    { label: 'Focus', value: 'ML systems · LLMs · Statistical genetics' },
+    { label: 'Focus', value: 'MLOps · Scalable systems · Generative AI' },
     { label: 'Languages', value: 'English · Amharic · Afaan Oromo' },
   ],
 };
