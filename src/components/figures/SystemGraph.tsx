@@ -14,7 +14,7 @@ const nodes: Node[] = [
   { id: 'train', x: 120, y: 196, label: 'train', side: 'left', accent: true },
   { id: 'eval', x: 280, y: 196, label: 'evaluate', side: 'right', accent: true },
   { id: 'serve', x: 200, y: 276, label: 'serve · api', side: 'left', accent: true },
-  { id: 'llm', x: 318, y: 276, label: 'llm · retrieval', side: 'right' },
+  { id: 'llm', x: 300, y: 276, label: 'llm · rag', side: 'right' },
   { id: 'monitor', x: 200, y: 352, label: 'monitor', side: 'right', accent: true },
 ];
 
