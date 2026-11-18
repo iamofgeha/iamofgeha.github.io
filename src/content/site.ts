@@ -182,7 +182,7 @@ export const experience: Experience[] = [
     mark: 'ET',
     logo: ethioTelecomLogo,
     role: 'Cybersecurity Engineer · Intern',
-    period: '2021 — 2022',
+    period: 'Feb 2022 — Jun 2022',
     summary: 'Security operations for network infrastructure.',
     highlights: [
       'Implemented and managed security controls protecting networks and systems.',
