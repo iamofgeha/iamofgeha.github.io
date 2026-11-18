@@ -67,31 +67,19 @@ export function Nav() {
       >
         <div className="container-page flex h-16 items-center justify-between gap-6">
           <a href="#top" className="group flex items-center gap-2.5" aria-label={`${profile.name}, back to top`}>
-            <span className="grid h-7 w-7 place-items-center rounded-lg border hairline-strong font-mono text-[0.68rem] font-medium tracking-tight transition-colors group-hover:border-accent/60">
-              OG
-            </span>
-            <span className="text-sm font-medium tracking-tight">{profile.name}</span>
+            <span className="text-sm font-semibold tracking-tight">{profile.name}</span>
           </a>
 
           <nav aria-label="Primary" className="hidden md:block">
-            <ul className="flex items-center gap-1 rounded-full border hairline bg-surface/40 p-1">
+            <ul className="flex items-center gap-6">
               {nav.map((item) => {
                 const isActive = active === item.id;
                 return (
-                  <li key={item.id} className="relative">
-                    {isActive && (
-                      <motion.span
-                        layoutId="nav-pill"
-                        className="absolute inset-0 rounded-full bg-fg/[0.07]"
-                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                      />
-                    )}
+                  <li key={item.id}>
                     <a
                       href={`#${item.id}`}
                       aria-current={isActive ? 'true' : undefined}
-                      className={`relative block rounded-full px-3.5 py-1.5 text-[0.82rem] transition-colors ${
-                        isActive ? 'text-fg' : 'text-muted hover:text-fg'
-                      }`}
+                      className={`text-sm transition-colors ${isActive ? 'text-fg' : 'text-muted hover:text-fg'}`}
                     >
                       {item.label}
                     </a>

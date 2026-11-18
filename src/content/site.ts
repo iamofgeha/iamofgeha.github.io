@@ -588,9 +588,7 @@ export const writing: Post[] = [
 export const nav = [
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
-  { id: 'work', label: 'Work' },
-  { id: 'research', label: 'Research' },
-  { id: 'education', label: 'Education' },
+  { id: 'work', label: 'Projects' },
   { id: 'writing', label: 'Writing' },
   { id: 'contact', label: 'Contact' },
 ] as const;
