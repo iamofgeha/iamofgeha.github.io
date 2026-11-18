@@ -13,6 +13,13 @@
  * Search the codebase for "review:" to find them all. Review notes are never rendered.
  */
 
+import coopBankLogo from '../assets/logos/coop-bank-oromia.webp';
+import eaiiLogo from '../assets/logos/eaii.webp';
+import ethioTelecomLogo from '../assets/logos/ethio-telecom.webp';
+import insaLogo from '../assets/logos/insa.webp';
+import rejuveLogo from '../assets/logos/rejuve-bio.webp';
+import singularityLogo from '../assets/logos/singularitynet.webp';
+
 export type Link = { label: string; href: string };
 
 /** Public address of the site. Set VITE_SITE_URL in `.env` (no trailing slash). */
@@ -72,7 +79,7 @@ export type Experience = {
   short?: string;
   /** Initials shown in the badge where a logo would go. */
   mark: string;
-  /** Optional logo (import an image and set it here to replace the initials). */
+  /** Company logo from its official website (falls back to the initials). */
   logo?: string;
   /** e.g. 'Full-time', 'Contract'. Only shown when set. */
   type?: string;
@@ -93,6 +100,7 @@ export const experience: Experience[] = [
   {
     org: 'Rejuve Bio',
     mark: 'RB',
+    logo: rejuveLogo,
     orgNote: 'SingularityNET ecosystem',
     role: 'AI/ML Engineer',
     period: 'May 2025 — Present',
@@ -110,6 +118,7 @@ export const experience: Experience[] = [
   {
     org: 'SingularityNET',
     mark: 'SN',
+    logo: singularityLogo,
     role: 'AI Researcher',
     period: 'Nov 2024 — Present',
     summary:
@@ -125,6 +134,7 @@ export const experience: Experience[] = [
   {
     org: 'Cooperative Bank of Oromia',
     mark: 'CBO',
+    logo: coopBankLogo,
     role: 'AI/ML Engineer & Backend Developer',
     period: 'Sep 2024 — Jun 2025',
     summary: 'Machine learning for predictive analytics in banking operations, from model design to production backend services.',
@@ -140,6 +150,7 @@ export const experience: Experience[] = [
   {
     org: 'Ethiopian Artificial Intelligence Institute',
     mark: 'EAII',
+    logo: eaiiLogo,
     short: 'Ethiopian AI Institute',
     role: 'AI Researcher & Developer',
     period: '2023 — Jul 2024',
@@ -155,6 +166,7 @@ export const experience: Experience[] = [
   {
     org: 'Information Network Security Agency',
     mark: 'INSA',
+    logo: insaLogo,
     short: 'INSA',
     role: 'Python Django Developer · Intern',
     period: '2022 — 2023',
@@ -168,6 +180,7 @@ export const experience: Experience[] = [
   {
     org: 'Ethio Telecom',
     mark: 'ET',
+    logo: ethioTelecomLogo,
     role: 'Cybersecurity Engineer · Intern',
     period: '2021 — 2022',
     summary: 'Security operations for network infrastructure.',
