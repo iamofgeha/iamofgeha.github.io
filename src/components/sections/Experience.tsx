@@ -1,5 +1,5 @@
-import { ArrowUpRight, Award, GraduationCap } from 'lucide-react';
-import { certifications, education, experience } from '../../content/site';
+import { ArrowUpRight } from 'lucide-react';
+import { experience } from '../../content/site';
 import { Reveal } from '../ui/Reveal';
 import { Em, Section } from '../ui/Section';
 
@@ -61,43 +61,6 @@ export function Experience() {
         ))}
       </ol>
 
-      <Reveal>
-        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border hairline bg-fg/[0.06] md:grid-cols-2">
-          <div className="bg-bg p-6 sm:p-7">
-            <p className="eyebrow flex items-center gap-2">
-              <GraduationCap size={14} strokeWidth={1.5} aria-hidden /> Education
-            </p>
-            <ul className="mt-5 space-y-5">
-              {education.map((e) => (
-                <li key={e.school} className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="font-medium tracking-tight">{e.school}</p>
-                    <p className="mt-1 text-sm text-muted">
-                      {e.credential}
-                      {e.note ? ` · ${e.note}` : ''}
-                    </p>
-                  </div>
-                  {e.period ? <p className="shrink-0 pt-1 font-mono text-xs text-subtle">{e.period}</p> : null}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-bg p-6 sm:p-7">
-            <p className="eyebrow flex items-center gap-2">
-              <Award size={14} strokeWidth={1.5} aria-hidden /> Certifications
-            </p>
-            <p className="mt-5 text-sm text-subtle">{certifications.issuer}</p>
-            <ul className="mt-3 space-y-2.5">
-              {certifications.items.map((c) => (
-                <li key={c} className="flex gap-3 text-[0.95rem] text-fg/85">
-                  <span className="mt-[0.7em] h-px w-3 shrink-0 bg-fg/30" aria-hidden />
-                  {c}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Reveal>
     </Section>
   );
 }

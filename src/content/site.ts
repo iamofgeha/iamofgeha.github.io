@@ -159,7 +159,13 @@ export const experience: Experience[] = [
   },
 ];
 
-export type Education = { school: string; credential: string; period?: string; note?: string };
+export type Education = {
+  school: string;
+  credential: string;
+  period?: string;
+  note?: string;
+  href?: string; // proof of completion, from the CV
+};
 
 export const education: Education[] = [
   {
@@ -167,20 +173,42 @@ export const education: Education[] = [
     credential: 'BSc, Computer Science and Engineering',
     period: '2019 — 2023',
     note: 'GPA 3.8 / 4.0',
+    href: 'https://drive.google.com/file/d/1NnDgvF8u_Qdx6CgBe7GJHZALNka1dc2H/view',
   },
-  { school: '10 Academy', credential: 'Kifiya AI Mastery training program' },
-  { school: 'WorldQuant University', credential: 'Graduate Certificate, Applied Data Science Lab' },
+  {
+    school: '10 Academy',
+    credential: 'Kifiya AI Mastery training program',
+    href: 'https://drive.google.com/file/d/1ygqWWRvqlEJDRlGyzdxu_l-nIRZmA_ZZ/view',
+  },
+  {
+    school: 'WorldQuant University',
+    credential: 'Graduate Certificate, Applied Data Science Lab',
+    href: 'https://www.credly.com/badges/4b184318-9836-4cac-9d39-623ceb995869/public_url',
+  },
 ];
 
-export const certifications = {
-  issuer: 'Coursera',
-  items: [
-    'Machine Learning Specialization',
-    'Deep Learning Specialization',
-    'Mathematics for Machine Learning and Data Science Specialization',
-    'Natural Language Processing Specialization',
-  ],
-};
+export type Certification = { name: string; issuer: string; href?: string };
+
+/** Links are the verification URLs embedded in the CV. */
+export const certifications: Certification[] = [
+  {
+    name: 'Machine Learning Specialization',
+    issuer: 'Coursera',
+    href: 'https://www.coursera.org/account/accomplishments/specialization/WXQMCVERK4C0',
+  },
+  {
+    name: 'Deep Learning Specialization',
+    issuer: 'Coursera',
+    href: 'https://www.coursera.org/account/accomplishments/specialization/0JH2XRVCSFKS',
+  },
+  {
+    name: 'Mathematics for Machine Learning and Data Science Specialization',
+    issuer: 'Coursera',
+    href: 'https://www.coursera.org/account/accomplishments/specialization/BN71F27PA84T',
+  },
+  // review: no verification link in the CV yet
+  { name: 'Natural Language Processing Specialization', issuer: 'Coursera' },
+];
 
 /* ------------------------------------------------------------------ */
 /* Projects                                                            */
@@ -562,6 +590,7 @@ export const nav = [
   { id: 'experience', label: 'Experience' },
   { id: 'work', label: 'Work' },
   { id: 'research', label: 'Research' },
+  { id: 'education', label: 'Education' },
   { id: 'writing', label: 'Writing' },
   { id: 'contact', label: 'Contact' },
 ] as const;

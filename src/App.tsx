@@ -4,6 +4,7 @@ import { Footer } from './components/layout/Footer';
 import { Nav } from './components/layout/Nav';
 import { About } from './components/sections/About';
 import { Contact } from './components/sections/Contact';
+import { Credentials } from './components/sections/Credentials';
 import { Experience } from './components/sections/Experience';
 import { Hero } from './components/sections/Hero';
 import { Projects } from './components/sections/Projects';
@@ -30,6 +31,7 @@ export default function App() {
           <Experience />
           <Projects />
           <Research />
+          <Credentials />
           <Writing />
           <Contact />
         </main>
