@@ -70,6 +70,14 @@ export type Experience = {
   org: string;
   /** Shorter name for compact places such as the "Worked with" strip. */
   short?: string;
+  /** Initials shown in the badge where a logo would go. */
+  mark: string;
+  /** Optional logo (import an image and set it here to replace the initials). */
+  logo?: string;
+  /** e.g. 'Full-time', 'Contract'. Only shown when set. */
+  type?: string;
+  /** e.g. 'Addis Ababa · On-site', 'Remote'. Only shown when set. */
+  location?: string;
   orgNote?: string;
   role: string;
   period: string;
@@ -80,9 +88,11 @@ export type Experience = {
   review?: string;
 };
 
+// review: add `type` (Full-time, Contract…) and `location` (Addis Ababa · On-site, Remote…) for each role.
 export const experience: Experience[] = [
   {
     org: 'Rejuve Bio',
+    mark: 'RB',
     orgNote: 'SingularityNET ecosystem',
     role: 'AI/ML Engineer',
     period: 'May 2025 — Present',
@@ -99,6 +109,7 @@ export const experience: Experience[] = [
   },
   {
     org: 'SingularityNET',
+    mark: 'SN',
     role: 'AI Researcher',
     period: 'Nov 2024 — Present',
     summary:
@@ -113,6 +124,7 @@ export const experience: Experience[] = [
   },
   {
     org: 'Cooperative Bank of Oromia',
+    mark: 'CBO',
     role: 'AI/ML Engineer & Backend Developer',
     period: 'Sep 2024 — Jun 2025',
     summary: 'Machine learning for predictive analytics in banking operations, from model design to production backend services.',
@@ -127,6 +139,7 @@ export const experience: Experience[] = [
   },
   {
     org: 'Ethiopian Artificial Intelligence Institute',
+    mark: 'EAII',
     short: 'Ethiopian AI Institute',
     role: 'AI Researcher & Developer',
     period: '2023 — Jul 2024',
@@ -141,6 +154,7 @@ export const experience: Experience[] = [
   },
   {
     org: 'Information Network Security Agency',
+    mark: 'INSA',
     short: 'INSA',
     role: 'Python Django Developer · Intern',
     period: '2022 — 2023',
@@ -153,6 +167,7 @@ export const experience: Experience[] = [
   },
   {
     org: 'Ethio Telecom',
+    mark: 'ET',
     role: 'Cybersecurity Engineer · Intern',
     period: '2021 — 2022',
     summary: 'Security operations for network infrastructure.',
