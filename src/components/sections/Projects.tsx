@@ -36,12 +36,12 @@ function FeaturedCard({ p }: { p: FeaturedProject }) {
         ))}
       </div>
 
-      <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
-        {p.links.map((l) => (
+      <Details
+        className="mt-5"
+        actions={p.links.map((l) => (
           <ExtLink key={l.href} link={l} />
         ))}
-      </div>
-      <Details className="mt-4">
+      >
         <div className="space-y-5 border-t hairline pt-5">
           <div>
             <p className="text-xs font-medium text-subtle">Problem</p>
