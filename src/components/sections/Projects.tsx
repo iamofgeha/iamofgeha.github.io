@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ArrowUpRight, Brain, Database, MessagesSquare, Network } from 'lucide-react';
-import { archive, builds, featured, type Build, type FeaturedProject, type Link } from '../../content/site';
+import { archive, builds, featured, profile, type Build, type FeaturedProject, type Link } from '../../content/site';
 import { ProjectFigure } from '../figures/ProjectFigure';
 import { Details } from '../ui/Details';
 import { Reveal } from '../ui/Reveal';
@@ -200,7 +200,11 @@ export function Projects() {
             </li>
           ))}
         </ul>
-        <Details label={`Earlier analytics work (${archive.length})`} className="mt-6">
+        <Details
+          label={`Earlier analytics work (${archive.length})`}
+          className="mt-6"
+          actions={<ExtLink link={{ label: 'More on GitHub', href: profile.social.github }} />}
+        >
           <ul className="divide-y divide-hairline border-y hairline">
             {archive.map((b) => (
               <BuildRow key={b.title} b={b} />
