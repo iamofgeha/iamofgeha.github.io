@@ -11,10 +11,10 @@ export function Experience() {
       label="Experience"
       title={
         <>
-          From backend systems to <Em>AI research infrastructure.</Em>
+          From backend systems to <Em>production machine learning.</Em>
         </>
       }
-      intro="Roles in reverse order. The most recent work is the most specific: these are changes I shipped, linked to the code where it is public."
+      intro="Roles across AI research, finance and the life sciences, most recent first."
     >
       <ol className="relative">
         {experience.map((job, i) => (
