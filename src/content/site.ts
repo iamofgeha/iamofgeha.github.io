@@ -101,13 +101,14 @@ export const experience: Experience[] = [
     org: 'SingularityNET',
     role: 'AI Researcher',
     period: 'Nov 2024 — Present',
-    review: 'Add one to three concrete research contributions you can share publicly; only the MeTTa work is evidenced so far.',
     summary:
-      'Research in the SingularityNET ecosystem, which builds toward beneficial, decentralised AGI on the OpenCog Hyperon stack.',
+      'Research in the SingularityNET ecosystem, which builds toward beneficial, decentralised AGI on the OpenCog Hyperon stack, with a focus on AI for biology.',
     highlights: [
-      'Explore symbolic and neuro-symbolic reasoning in MeTTa, the language of OpenCog Hyperon, including forward- and backward-chaining inference over knowledge and rule bases.',
+      'Statistical analysis of GWAS and genotype datasets for gene–trait analysis.',
+      'Collaborate with cross-functional teams to integrate ML outputs into research systems.',
+      'Explore symbolic and neuro-symbolic reasoning in MeTTa, the language of OpenCog Hyperon, including forward- and backward-chaining inference.',
     ],
-    stack: ['MeTTa', 'OpenCog Hyperon', 'Python'],
+    stack: ['Python', 'Statistical genetics', 'MeTTa', 'OpenCog Hyperon'],
     link: { label: 'MettaLogic', href: 'https://github.com/Ofgeha-Gelana/MettaLogic' },
   },
   {
