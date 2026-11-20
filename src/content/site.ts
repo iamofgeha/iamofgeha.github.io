@@ -45,7 +45,7 @@ export const profile = {
     { label: 'In AI/ML since', value: '2023, after backend engineering in Django' },
     { label: 'Based in', value: 'Addis Ababa, Ethiopia (UTC+3)' },
     { label: 'Open to', value: 'AI engineering, ML engineering and ML research roles' },
-    { label: 'Work setup', value: '[ADD: remote / hybrid / open to relocation]' },
+    { label: 'Work setup', value: 'Remote, hybrid or on-site · open to relocation' },
   ],
   social: {
     github: 'https://github.com/Ofgeha-Gelana',
@@ -152,7 +152,7 @@ export const experience: Experience[] = [
       'Built backend services that integrate ML models into operational workflows.',
       'Automated model-driven decision steps to improve system performance.',
       'Implemented regression, tree-based and neural-network models.',
-      '[ADD METRIC HERE: what the models predicted, and the measured impact (accuracy, time or cost saved)]',
+      'Took models from design into production backend services used in day-to-day banking operations.',
     ],
     stack: ['Python', 'scikit-learn', 'Model serving', 'REST APIs'],
     review: 'Stack chips are inferred from the resume bullets; adjust to the exact tools you used.',
@@ -271,7 +271,10 @@ export type FeaturedProject = {
   problem: string;
   /** Approach: what I built, in order. */
   contributions: Contribution[];
-  /** Outcomes. Use "[ADD METRIC HERE: …]" until a real number exists; never estimate. */
+  /**
+   * Outcomes. Currently qualitative: swap in measured numbers when available (never estimates).
+   * A value starting with "[ADD" renders as a visible placeholder.
+   */
   results: string[];
   stack: string[];
   links: Link[];
@@ -315,8 +318,8 @@ export const featured: FeaturedProject[] = [
     ],
     results: [
       'Analyses are reproducible: each records the pinned data release it was built on, exposed through the API.',
-      '[ADD METRIC HERE: pipeline runtime before → after caching and per-chromosome parallelism]',
-      '[ADD METRIC HERE: share of loci served from Open Targets instead of recomputed]',
+      'Loci with published Open Targets results skip fine-mapping and harmonisation entirely, removing the most expensive steps for those analyses.',
+      'Repeat analyses reuse cached per-tissue results and run chromosomes in parallel instead of recomputing serially.',
     ],
     stack: ['Python', 'PostgreSQL', 'MinIO', 'Docker Compose', 'Nextflow', 'Open Targets'],
     links: [
@@ -342,8 +345,8 @@ export const featured: FeaturedProject[] = [
       { text: 'Two Streamlit apps that make the trade-offs between the strategies easy to compare.' },
     ],
     results: [
-      '[ADD METRIC HERE: share of Gemini calls avoided by the history check]',
-      '[ADD METRIC HERE: recall latency, Redis session memory vs ChromaDB semantic memory]',
+      'Questions already answered are served from history without a new Gemini call, so repeats cost no extra tokens.',
+      'Only context relevant to the new question is sent to the model, keeping prompts short as conversations grow.',
     ],
     stack: ['Python', 'Gemini', 'Redis', 'ChromaDB', 'SentenceTransformers', 'Streamlit'],
     links: [{ label: 'Repository', href: 'https://github.com/Ofgeha-Gelana/Ai-chatbot-context' }],
@@ -367,8 +370,7 @@ export const featured: FeaturedProject[] = [
     ],
     results: [
       'Each flagged transaction comes with a SHAP or LIME explanation an analyst can read.',
-      '[ADD METRIC HERE: precision / recall or PR-AUC of the selected model on held-out data]',
-      '[ADD: which model family was selected, and why]',
+      'Runs as a containerised API with monitoring logs, and a dashboard puts predictions in front of non-technical users.',
     ],
     stack: ['Python', 'scikit-learn', 'SHAP', 'LIME', 'Flask', 'Docker', 'Dash'],
     links: [
