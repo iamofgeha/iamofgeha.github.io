@@ -7,6 +7,7 @@ function seoFiles(siteUrl: string): Plugin {
     name: 'seo-files',
     apply: 'build',
     generateBundle() {
+      const lastmod = new Date().toISOString().slice(0, 10);
       this.emitFile({
         type: 'asset',
         fileName: 'robots.txt',
@@ -15,7 +16,7 @@ function seoFiles(siteUrl: string): Plugin {
       this.emitFile({
         type: 'asset',
         fileName: 'sitemap.xml',
-        source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${siteUrl}/</loc></url>\n</urlset>\n`,
+        source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${siteUrl}/</loc><lastmod>${lastmod}</lastmod></url>\n</urlset>\n`,
       });
     },
   };
