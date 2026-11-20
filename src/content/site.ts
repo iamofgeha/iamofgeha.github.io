@@ -526,7 +526,7 @@ export const interests: Interest[] = [
   {
     area: 'ML systems & MLOps',
     question: 'What it takes to keep a model useful after deployment: reproducibility, monitoring and cost.',
-    evidence: { label: 'Fraud detection service', href: '#work' },
+    evidence: { label: 'Fraud detection service', href: '#fraud-detection' },
   },
   {
     area: 'Model evaluation & tuning',
@@ -552,7 +552,7 @@ export const interests: Interest[] = [
   {
     area: 'AI for science',
     question: 'How to make machine-generated hypotheses traceable, reproducible and worth testing.',
-    evidence: { label: 'Research infrastructure', href: '#work' },
+    evidence: { label: 'Research infrastructure', href: '#research-infra' },
   },
   {
     area: 'Brain-inspired learning',

@@ -21,7 +21,7 @@ function Block({ label, children }: { label: string; children: ReactNode }) {
 /** Case study: context → problem → approach → result, all visible without a click. */
 function FeaturedCard({ p }: { p: FeaturedProject }) {
   return (
-    <article aria-labelledby={`${p.id}-title`} className="card card-interactive overflow-hidden">
+    <article id={p.id} aria-labelledby={`${p.id}-title`} className="card card-interactive overflow-hidden">
       <figure
         className="border-b hairline bg-bg/50 px-5 py-6 sm:px-8"
         style={{
