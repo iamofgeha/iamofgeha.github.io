@@ -106,17 +106,110 @@
     border-color: rgb(var(--line) / var(--line-alpha));
   }
 
-
+  /* Page width. Sections put their heading in a left rail from lg up (see Section.tsx). */
   .container-page {
-    @apply mx-auto w-full max-w-3xl px-5 sm:px-8;
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
   }
 
+  /* Surfaces */
+  .card {
+    @apply rounded-xl border bg-surface/40 transition-colors duration-200;
+    border-color: rgb(var(--line) / var(--line-alpha));
+  }
+  .card-interactive:hover {
+    border-color: rgb(var(--fg) / 0.2);
+  }
+
+  /* Small mono tag for stacks and categories */
   .chip {
-    @apply inline-flex items-center rounded-full border px-2.5 py-1 font-mono text-[0.7rem] leading-none text-muted;
+    @apply inline-flex items-center rounded-full border px-2.5 py-1 font-mono text-micro text-muted;
     border-color: rgb(var(--line) / var(--line-alpha));
     background: rgb(var(--line) / calc(var(--line-alpha) * 0.35));
   }
 
+  /* Overline label above a block (Problem, What I did …) */
+  .eyebrow {
+    @apply text-xs font-medium text-subtle;
+  }
+
+  /* Round 44px icon button / link */
+  .icon-btn {
+    @apply grid h-11 w-11 place-items-center rounded-full text-muted transition-colors hover:bg-fg/[0.06] hover:text-fg;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-medium transition-[background-color,border-color,transform] duration-200 ease-out active:scale-[0.98];
+  }
+  .btn-sm {
+    @apply h-9 px-4 text-[0.8125rem];
+  }
+  .btn-primary {
+    @apply bg-fg text-bg hover:bg-fg/90;
+  }
+  .btn-secondary {
+    @apply border text-fg hover:bg-fg/[0.04];
+    border-color: rgb(var(--line) / calc(var(--line-alpha) * 2));
+  }
+  .btn-secondary:hover {
+    border-color: rgb(var(--fg) / 0.3);
+  }
+
+  /* Text link: quiet by default, full contrast on hover */
+  .link {
+    @apply inline-flex items-center gap-1 text-muted transition-colors hover:text-fg;
+  }
+
+  /* Visible marker for content Ofgeha still needs to supply. Search the code for "[ADD". */
+  .placeholder {
+    @apply rounded border border-dashed px-1.5 py-0.5 font-mono text-[0.75em] text-amber-600 dark:text-amber-400;
+    border-color: currentColor;
+  }
+
+  /* Scroll reveal (see Reveal.tsx). Content stays visible without JS support or in print. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @media print {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  /* Height animation without measuring: grid rows 0fr → 1fr (see Disclosure.tsx). */
+  .disclosure {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .disclosure > * {
+    min-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: visibility 0s linear 0.3s;
+  }
+  .disclosure[data-open='true'] {
+    grid-template-rows: 1fr;
+  }
+  .disclosure[data-open='true'] > * {
+    visibility: visible;
+    transition-delay: 0s;
+  }
 }
 
 @layer utilities {
