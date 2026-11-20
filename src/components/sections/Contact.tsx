@@ -28,8 +28,8 @@ export function Contact() {
     <Section id="contact" label="Contact" className="pb-24 sm:pb-28">
       <Reveal>
         <p className="max-w-xl text-pretty leading-relaxed text-muted">
-          I’m open to ML engineering roles, research collaborations, and hard problems where data, models and
-          production systems meet. The quickest way to reach me is email.
+          I’m open to AI engineering, ML engineering and ML research roles, and to research collaborations where
+          data, models and production systems meet. The quickest way to reach me is email.
         </p>
 
         <div className="mt-6 flex flex-wrap items-center gap-3">
