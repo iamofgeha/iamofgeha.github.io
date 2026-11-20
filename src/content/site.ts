@@ -31,13 +31,22 @@ export const profile = {
   location: 'Addis Ababa, Ethiopia',
   email: 'ofgehagelana2019@gmail.com', // from the CV
   cv: 'Ofgeha-Gelana-CV.pdf', // in /public
-  headline: ['Building intelligent systems.', 'Exploring the science behind AI.'],
+  // Line 1 is the page's <h1>. Line 2 renders muted, under it.
+  headline: [
+    'I build AI systems that make it to production.',
+    'LLM applications, ML pipelines, and the infrastructure that keeps their answers traceable.',
+  ],
   intro:
-    'I’m an AI/ML engineer and researcher. I design, build and deploy machine-learning systems end to end, from data pipelines and model training to APIs in production, with a growing focus on LLMs and generative AI. My work has spanned AI research, banking and the life sciences.',
-  current: {
-    label: 'Currently',
-    text: 'AI/ML Engineer at Rejuve Bio · AI Researcher at SingularityNET',
-  },
+    'I design, build and deploy machine-learning systems end to end: data pipelines, model training, LLM applications and the APIs that serve them. Today that means data and ML infrastructure for an AI system that generates biological hypotheses at Rejuve Bio, and AI research at SingularityNET. Before that: production ML in banking, and research at Ethiopia’s national AI institute.',
+  /** "At a glance" panel in the hero: the facts a recruiter scans for. */
+  glance: [
+    { label: 'Currently', value: 'AI/ML Engineer, Rejuve Bio · AI Researcher, SingularityNET' },
+    { label: 'Focus', value: 'LLM applications · ML infrastructure & MLOps · AI for science' },
+    { label: 'In AI/ML since', value: '2023, after backend engineering in Django' },
+    { label: 'Based in', value: 'Addis Ababa, Ethiopia (UTC+3)' },
+    { label: 'Open to', value: 'AI engineering, ML engineering and ML research roles' },
+    { label: 'Work setup', value: '[ADD: remote / hybrid / open to relocation]' },
+  ],
   social: {
     github: 'https://github.com/Ofgeha-Gelana',
     linkedin: 'https://www.linkedin.com/in/ofgeha-gelana/',
