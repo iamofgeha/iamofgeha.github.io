@@ -7,9 +7,10 @@ import { GitHubIcon, LinkedInIcon, MediumIcon } from '../ui/icons';
 
 export function Hero() {
   const reduce = useReducedMotion();
+  // Transform only: fading from opacity 0 would hold back Largest Contentful Paint.
   const enter = (delay: number) => ({
-    initial: { opacity: 0, y: reduce ? 0 : 10 },
-    animate: { opacity: 1, y: 0 },
+    initial: { y: reduce ? 0 : 10 },
+    animate: { y: 0 },
     transition: { duration: 0.6, delay: reduce ? 0 : delay, ease: [0.22, 1, 0.36, 1] as const },
   });
 
