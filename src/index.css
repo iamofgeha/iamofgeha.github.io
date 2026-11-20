@@ -15,7 +15,7 @@
     --line: 255 255 255; /* used at low alpha */
     --fg: 242 241 236;
     --muted: 160 161 166;
-    --subtle: 108 110 117;
+    --subtle: 132 134 141; /* ≥4.5:1 on bg, surface and raised */
     --accent: 142 166 255;
     --accent-fg: 9 11 20;
     --line-alpha: 0.08;
@@ -30,7 +30,7 @@
     --line: 15 16 20;
     --fg: 17 18 21;
     --muted: 82 84 92;
-    --subtle: 128 130 138;
+    --subtle: 104 106 114; /* ≥4.5:1 on bg, surface and raised */
     --accent: 52 84 230;
     --accent-fg: 255 255 255;
     --line-alpha: 0.1;
