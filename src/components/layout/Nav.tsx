@@ -78,7 +78,7 @@ export function Nav() {
                   <li key={item.id}>
                     <a
                       href={`#${item.id}`}
-                      aria-current={isActive ? 'true' : undefined}
+                      aria-current={isActive ? 'location' : undefined}
                       className={`text-sm transition-colors ${isActive ? 'text-fg' : 'text-muted hover:text-fg'}`}
                     >
                       {item.label}
