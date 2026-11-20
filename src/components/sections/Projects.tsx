@@ -1,98 +1,107 @@
-import { useState } from 'react';
-import { ArrowUpRight, Brain, Database, MessagesSquare, Network } from 'lucide-react';
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { Brain, Database, MessagesSquare, Network } from 'lucide-react';
 import { archive, builds, featured, profile, type Build, type FeaturedProject, type Link } from '../../content/site';
 import { ProjectFigure } from '../figures/ProjectFigure';
+import { DashList } from '../ui/DashList';
 import { Details } from '../ui/Details';
+import { MaybePlaceholder } from '../ui/Placeholder';
 import { Reveal } from '../ui/Reveal';
 import { Section } from '../ui/Section';
+import { TextLink } from '../ui/TextLink';
 
-function ExtLink({ link }: { link: Link }) {
+function Block({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <a
-      href={link.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-fg"
-    >
-      {link.label}
-      <ArrowUpRight size={13} aria-hidden />
-    </a>
+    <div>
+      <h4 className="eyebrow">{label}</h4>
+      <div className="mt-2">{children}</div>
+    </div>
   );
 }
 
+/** Case study: context → problem → approach → result, all visible without a click. */
 function FeaturedCard({ p }: { p: FeaturedProject }) {
   return (
-    <article
-      aria-labelledby={`${p.id}-title`}
-      className="overflow-hidden rounded-xl border hairline bg-surface/40 transition-colors hover:border-fg/20"
-    >
+    <article aria-labelledby={`${p.id}-title`} className="card card-interactive overflow-hidden">
       <figure
-        className="border-b hairline bg-bg/50 px-5 py-5 sm:px-8"
+        className="border-b hairline bg-bg/50 px-5 py-6 sm:px-8"
         style={{
           backgroundImage: 'radial-gradient(rgb(var(--line) / calc(var(--line-alpha) * 1.3)) 1px, transparent 1px)',
           backgroundSize: '16px 16px',
         }}
       >
-        <div className="mx-auto max-w-[440px]">
+        <div className="mx-auto max-w-[560px]">
           <ProjectFigure kind={p.figure} />
         </div>
       </figure>
 
-      <div className="p-6 sm:p-7">
-        <p className="text-xs text-subtle">{p.context}</p>
-        <h3 id={`${p.id}-title`} className="mt-2 text-lg font-semibold tracking-tight">
+      <div className="p-6 sm:p-8">
+        <p className="flex items-center gap-2 text-xs text-subtle">
+          <span className="font-mono">{p.index}</span>
+          <span aria-hidden>·</span>
+          {p.context}
+        </p>
+        <h3 id={`${p.id}-title`} className="mt-2 text-heading font-semibold">
           {p.title}
         </h3>
-        <p className="mt-2 text-pretty text-sm leading-relaxed text-muted">{p.summary}</p>
+        <p className="mt-2 max-w-2xl text-pretty text-sm leading-relaxed text-muted">{p.summary}</p>
+        <p className="mt-3 text-sm">
+          <span className="text-subtle">Role: </span>
+          {p.role}
+        </p>
 
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {p.stack.map((s) => (
-            <span key={s} className="chip">
-              {s}
-            </span>
-          ))}
+        <div className="mt-6 grid gap-6 border-t hairline pt-6 md:grid-cols-2 md:gap-8">
+          <div className="space-y-6">
+            <Block label="Problem">
+              <p className="text-pretty text-sm leading-relaxed text-muted">{p.problem}</p>
+            </Block>
+            <Block label="Result">
+              <DashList items={p.results.map((r) => ({ key: r, content: <MaybePlaceholder text={r} /> }))} />
+            </Block>
+          </div>
+          <Block label="What I did">
+            <DashList
+              items={p.contributions.map((c) => ({
+                key: c.text,
+                content: (
+                  <>
+                    {c.text}
+                    {c.ref ? (
+                      <>
+                        {' '}
+                        <a
+                          href={c.ref.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Pull request ${c.ref.label}`}
+                          className="whitespace-nowrap text-xs text-fg/70 underline decoration-fg/20 underline-offset-4 hover:text-fg"
+                        >
+                          PR {c.ref.label}
+                        </a>
+                      </>
+                    ) : null}
+                  </>
+                ),
+              }))}
+            />
+          </Block>
         </div>
 
-        <Details
-          className="mt-5"
-          actions={p.links.map((l) => (
-            <ExtLink key={l.href} link={l} />
-          ))}
-        >
-          <div className="space-y-5 border-t hairline pt-5">
-            <div>
-              <p className="text-xs font-medium text-subtle">Problem</p>
-              <p className="mt-1.5 text-pretty text-sm leading-relaxed text-muted">{p.problem}</p>
-            </div>
-            <div>
-              <p className="text-xs font-medium text-subtle">What I did</p>
-              <ul className="mt-2 space-y-2">
-                {p.contributions.map((c) => (
-                  <li key={c.text} className="flex gap-3 text-sm leading-relaxed text-muted">
-                    <span className="mt-[0.65em] h-px w-3 shrink-0 bg-fg/30" aria-hidden />
-                    <span className="text-pretty">
-                      {c.text}
-                      {c.ref ? (
-                        <>
-                          {' '}
-                          <a
-                            href={c.ref.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`Pull request ${c.ref.label}`}
-                            className="whitespace-nowrap text-xs text-fg/70 underline decoration-fg/20 underline-offset-4 hover:text-fg"
-                          >
-                            PR {c.ref.label}
-                          </a>
-                        </>
-                      ) : null}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 border-t hairline pt-5">
+          <div className="flex flex-wrap gap-1.5">
+            {p.stack.map((s) => (
+              <span key={s} className="chip">
+                {s}
+              </span>
+            ))}
           </div>
-        </Details>
+          <div className="flex flex-wrap gap-x-4 gap-y-1 sm:ml-auto">
+            {p.links.map((l) => (
+              <TextLink key={l.href} href={l.href}>
+                {l.label}
+              </TextLink>
+            ))}
+          </div>
+        </div>
       </div>
     </article>
   );
@@ -111,10 +120,47 @@ const categoryIcon: Record<Build['category'], typeof Brain> = {
   Reasoning: Network,
 };
 
+/** Three-line description that can be expanded when (and only when) it is cut off. */
+function ClampedText({ text }: { text: string }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const [open, setOpen] = useState(false);
+  const [clamped, setClamped] = useState(false);
+  const id = useId();
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || open) return;
+    const check = () => setClamped(el.scrollHeight > el.clientHeight + 1);
+    check();
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [open]);
+
+  return (
+    <div>
+      <p id={id} ref={ref} className={`text-sm leading-relaxed text-muted ${open ? '' : 'line-clamp-3'}`}>
+        {text}
+      </p>
+      {clamped || open ? (
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          aria-controls={id}
+          className="link mt-1 text-xs"
+        >
+          {open ? 'Less' : 'More'}
+        </button>
+      ) : null}
+    </div>
+  );
+}
+
 function BuildCard({ b }: { b: Build }) {
   const Icon = categoryIcon[b.category];
   return (
-    <article className="flex h-full flex-col rounded-xl border hairline bg-surface/40 p-5 transition-colors hover:border-fg/20">
+    <article className="card card-interactive flex h-full flex-col p-5">
       <div className="flex items-start gap-3">
         <span
           aria-hidden
@@ -129,13 +175,14 @@ function BuildCard({ b }: { b: Build }) {
           </p>
         </div>
       </div>
-      {/* flex-1 lives on the wrapper so the clamp itself keeps a fixed 3-line height. */}
       <div className="mt-3 flex-1">
-        <p className="line-clamp-3 text-sm leading-relaxed text-muted">{b.description}</p>
+        <ClampedText text={b.description} />
       </div>
       <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1">
         {buildLinks(b).map((l) => (
-          <ExtLink key={l.href} link={l} />
+          <TextLink key={l.href} href={l.href}>
+            {l.label}
+          </TextLink>
         ))}
       </div>
     </article>
@@ -143,7 +190,6 @@ function BuildCard({ b }: { b: Build }) {
 }
 
 function BuildRow({ b }: { b: Build }) {
-  const links = buildLinks(b);
   return (
     <li className="py-5">
       <div className="flex items-baseline justify-between gap-4">
@@ -152,8 +198,10 @@ function BuildRow({ b }: { b: Build }) {
       </div>
       <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">{b.description}</p>
       <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-        {links.map((l) => (
-          <ExtLink key={l.href} link={l} />
+        {buildLinks(b).map((l) => (
+          <TextLink key={l.href} href={l.href}>
+            {l.label}
+          </TextLink>
         ))}
       </div>
     </li>
@@ -168,8 +216,8 @@ export function Projects() {
   const visible = filter === ALL ? builds : builds.filter((b) => b.category === filter);
 
   return (
-    <Section id="work" label="Projects">
-      <div className="space-y-4">
+    <Section id="work" label="Projects" intro="Three case studies, then smaller builds.">
+      <div className="space-y-6">
         {featured.map((p) => (
           <Reveal key={p.id}>
             <FeaturedCard p={p} />
@@ -180,7 +228,12 @@ export function Projects() {
       <Reveal className="mt-14">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h3 className="text-sm font-medium text-muted">Other projects</h3>
-          <div role="group" aria-label="Filter projects by category" className="-mx-1 flex gap-1 overflow-x-auto px-1">
+          {/* Fades at the right edge hint that the chips scroll on narrow screens. */}
+          <div
+            role="group"
+            aria-label="Filter projects by category"
+            className="-mx-1 flex gap-1 overflow-x-auto px-1 [mask-image:linear-gradient(to_right,black_85%,transparent)] sm:[mask-image:none]"
+          >
             {categories.map((c) => (
               <button
                 key={c}
@@ -206,7 +259,7 @@ export function Projects() {
         <Details
           label={`Earlier analytics work (${archive.length})`}
           className="mt-6"
-          actions={<ExtLink link={{ label: 'More on GitHub', href: profile.social.github }} />}
+          actions={<TextLink href={profile.social.github}>More on GitHub</TextLink>}
         >
           <ul className="divide-y divide-hairline border-y hairline">
             {archive.map((b) => (
