@@ -1,6 +1,6 @@
 import { useId, useState, type ReactNode } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { Disclosure } from './Disclosure';
 
 type Props = {
   children: ReactNode;
@@ -19,34 +19,23 @@ export function Details({ children, label = 'Details', className = '', actions }
       <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
         {actions}
         <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        aria-controls={id}
-        className="inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-fg"
-      >
-        {open ? 'Hide details' : label}
-        <ChevronDown
-          size={15}
-          aria-hidden
-          className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
-        />
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          aria-controls={id}
+          className="link text-sm"
+        >
+          {open ? 'Hide' : label}
+          <ChevronDown
+            size={15}
+            aria-hidden
+            className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+          />
         </button>
       </div>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            id={id}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            <div className="pt-4">{children}</div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Disclosure id={id} open={open}>
+        <div className="pt-4">{children}</div>
+      </Disclosure>
     </div>
   );
 }

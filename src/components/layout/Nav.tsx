@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, Moon, Sun, X } from 'lucide-react';
 import { nav, profile } from '../../content/site';
 import { useActiveSection } from '../../hooks/useActiveSection';
@@ -62,7 +61,9 @@ export function Nav() {
       </a>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ${
-          scrolled || open ? 'border-b hairline bg-bg/75 backdrop-blur-xl backdrop-saturate-150' : 'border-b border-transparent'
+          scrolled || open
+            ? 'border-b hairline bg-bg/75 backdrop-blur-xl backdrop-saturate-150'
+            : 'border-b border-transparent'
         }`}
       >
         <div className="container-page flex h-16 items-center justify-between gap-6">
@@ -78,7 +79,7 @@ export function Nav() {
                   <li key={item.id}>
                     <a
                       href={`#${item.id}`}
-                      aria-current={isActive ? 'true' : undefined}
+                      aria-current={isActive ? 'location' : undefined}
                       className={`text-sm transition-colors ${isActive ? 'text-fg' : 'text-muted hover:text-fg'}`}
                     >
                       {item.label}
@@ -98,11 +99,7 @@ export function Nav() {
             >
               <ThemeIcon size={16} strokeWidth={1.75} />
             </button>
-            <a
-              href={profile.cv}
-              download
-              className="hidden h-9 items-center rounded-full border hairline-strong px-4 text-[0.82rem] font-medium transition-colors hover:bg-fg/[0.05] sm:inline-flex"
-            >
+            <a href={profile.cv} download className="btn btn-secondary btn-sm hidden sm:inline-flex">
               CV
             </a>
             <button
@@ -120,79 +117,64 @@ export function Nav() {
         </div>
       </header>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-menu"
-            ref={sheet}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Site navigation"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-bg/95 backdrop-blur-xl md:hidden"
-          >
-            <nav aria-label="Mobile" className="container-page flex min-h-full flex-col pb-10 pt-6">
-              <ul className="divide-y divide-hairline border-y hairline">
-                {nav.map((item, i) => (
-                  <motion.li
-                    key={item.id}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.03 * i, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      {open && (
+        <div
+          id="mobile-menu"
+          ref={sheet}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
+          className="fixed inset-x-0 bottom-0 top-16 z-40 animate-fade overflow-y-auto bg-bg/95 backdrop-blur-xl md:hidden"
+        >
+          <nav aria-label="Mobile" className="container-page flex min-h-full flex-col pb-10 pt-6">
+            <ul className="divide-y divide-hairline border-y hairline">
+              {nav.map((item, i) => (
+                <li key={item.id} className="animate-fade-up" style={{ animationDelay: `${0.03 * i}s` }}>
+                  <a
+                    href={`#${item.id}`}
+                    onClick={(e) => {
+                      // Close first so the scroll lock is released, then scroll to the section.
+                      e.preventDefault();
+                      setOpen(false);
+                      requestAnimationFrame(() => {
+                        document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
+                        history.replaceState(null, '', `#${item.id}`);
+                      });
+                    }}
+                    className="flex items-baseline justify-between py-4 text-title font-medium"
                   >
-                    <a
-                      href={`#${item.id}`}
-                      onClick={(e) => {
-                        // Close first so the scroll lock is released, then scroll to the section.
-                        e.preventDefault();
-                        setOpen(false);
-                        requestAnimationFrame(() => {
-                          document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
-                          history.replaceState(null, '', `#${item.id}`);
-                        });
-                      }}
-                      className="flex items-baseline justify-between py-4 text-[1.75rem] font-medium tracking-tight"
-                    >
-                      {item.label}
-                      <span className="font-mono text-xs text-subtle">{String(i + 1).padStart(2, '0')}</span>
-                    </a>
-                  </motion.li>
-                ))}
-              </ul>
-              <div className="mt-auto flex flex-wrap items-center gap-3 pt-10">
-                <a
-                  href={profile.cv}
-                  download
-                  className="inline-flex h-11 items-center rounded-full bg-fg px-5 text-sm font-medium text-bg"
-                >
-                  Download CV
-                </a>
-                <a
-                  href={profile.social.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  className="grid h-11 w-11 place-items-center rounded-full border hairline-strong"
-                >
-                  <GitHubIcon />
-                </a>
-                <a
-                  href={profile.social.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  className="grid h-11 w-11 place-items-center rounded-full border hairline-strong"
-                >
-                  <LinkedInIcon />
-                </a>
-              </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                    {item.label}
+                    <span className="font-mono text-xs text-subtle">{String(i + 1).padStart(2, '0')}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-auto flex flex-wrap items-center gap-3 pt-10">
+              <a href={profile.cv} download className="btn btn-primary">
+                Download CV
+              </a>
+              <a
+                href={profile.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="grid h-11 w-11 place-items-center rounded-full border hairline-strong"
+              >
+                <GitHubIcon />
+              </a>
+              <a
+                href={profile.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="grid h-11 w-11 place-items-center rounded-full border hairline-strong"
+              >
+                <LinkedInIcon />
+              </a>
+            </div>
+          </nav>
+        </div>
+      )}
     </>
   );
 }

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { MotionConfig } from 'framer-motion';
 import { Footer } from './components/layout/Footer';
 import { Nav } from './components/layout/Nav';
 import { About } from './components/sections/About';
@@ -22,21 +21,19 @@ export default function App() {
   }, []);
 
   return (
-    <MotionConfig reducedMotion="user">
-      <div>
-        <Nav />
-        <main id="main" tabIndex={-1} className="outline-none">
-          <Hero />
-          <About />
-          <Experience />
-          <Projects />
-          <Skills />
-          <Credentials />
-          <Writing />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
-    </MotionConfig>
+    <>
+      <Nav />
+      <main id="main" tabIndex={-1} className="outline-none">
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Credentials />
+        <Writing />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
 }

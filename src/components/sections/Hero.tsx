@@ -1,101 +1,112 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import type { CSSProperties } from 'react';
+import { ArrowDown, ArrowRight, Mail } from 'lucide-react';
 import avatar from '../../assets/images/avatar.webp';
 import { experience, profile } from '../../content/site';
 import { ButtonLink } from '../ui/Button';
 import { GitHubIcon, LinkedInIcon, MediumIcon } from '../ui/icons';
+import { MaybePlaceholder } from '../ui/Placeholder';
+
+/** Staggered entrance. Transform only, so text paints at once (good for LCP). */
+const rise = (delay: number) => ({
+  className: 'animate-rise',
+  style: { animationDelay: `${delay}s` } as CSSProperties,
+});
+
+const socials = [
+  { label: 'GitHub', href: profile.social.github, Icon: GitHubIcon },
+  { label: 'LinkedIn', href: profile.social.linkedin, Icon: LinkedInIcon },
+  { label: 'Medium', href: profile.social.medium, Icon: MediumIcon },
+];
 
 export function Hero() {
-  const reduce = useReducedMotion();
-  const enter = (delay: number) => ({
-    initial: { opacity: 0, y: reduce ? 0 : 10 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay: reduce ? 0 : delay, ease: [0.22, 1, 0.36, 1] as const },
-  });
-
-  const socials = [
-    { label: 'GitHub', href: profile.social.github, Icon: GitHubIcon },
-    { label: 'LinkedIn', href: profile.social.linkedin, Icon: LinkedInIcon },
-    { label: 'Medium', href: profile.social.medium, Icon: MediumIcon },
-  ];
-
   return (
-    <section id="top" aria-labelledby="hero-heading" className="pb-16 pt-32 sm:pb-20 sm:pt-40">
+    <section id="top" aria-labelledby="hero-heading" className="pb-16 pt-28 sm:pb-20 sm:pt-36">
       <div className="container-page">
-        <motion.div {...enter(0)} className="flex items-center gap-4">
-          <img
-            src={avatar}
-            alt={`Portrait of ${profile.name}`}
-            width={64}
-            height={64}
-            className="h-16 w-16 shrink-0 rounded-full border hairline object-cover"
-          />
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-end lg:gap-16">
           <div>
-            <h1 id="hero-heading" className="text-lg font-semibold tracking-tight">
-              {profile.name}
-            </h1>
-            <p className="text-sm text-muted">
-              {profile.role}
-              <span className="block sm:inline">
-                <span className="hidden sm:inline"> · </span>
-                {profile.location.split(',')[0]}
-              </span>
+            <div {...rise(0)}>
+              <div className="flex items-center gap-4">
+                <img
+                  src={avatar}
+                  alt={`Portrait of ${profile.name}`}
+                  width={56}
+                  height={56}
+                  className="h-14 w-14 shrink-0 rounded-full border hairline object-cover"
+                />
+                <div>
+                  <p className="font-semibold tracking-tight">{profile.name}</p>
+                  <p className="text-sm text-muted">{profile.role}</p>
+                </div>
+              </div>
+            </div>
+
+            <div {...rise(0.06)}>
+              <h1 id="hero-heading" className="mt-10 max-w-3xl text-balance text-display font-semibold">
+                {profile.headline[0]}
+              </h1>
+              <p className="mt-4 max-w-2xl text-balance text-xl font-medium tracking-tight text-muted sm:text-2xl">
+                {profile.headline[1]}
+              </p>
+            </div>
+
+            <p {...rise(0.12)} className="mt-6 max-w-2xl animate-rise text-pretty leading-relaxed text-muted">
+              {profile.intro}
             </p>
-          </div>
-        </motion.div>
 
-        <motion.p
-          {...enter(0.08)}
-          className="mt-10 text-balance text-3xl font-semibold leading-[1.15] tracking-tight sm:text-[2.6rem]"
-        >
-          {profile.headline[0]} <span className="text-muted">{profile.headline[1]}</span>
-        </motion.p>
-
-        <motion.p {...enter(0.16)} className="mt-6 max-w-2xl text-pretty text-[1.05rem] leading-relaxed text-muted">
-          {profile.intro}
-        </motion.p>
-
-        <motion.p {...enter(0.2)} className="mt-4 flex items-center gap-2 text-sm text-muted">
-          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
-          <span>
-            <span className="text-fg">{profile.current.label}:</span> {profile.current.text}
-          </span>
-        </motion.p>
-
-        <motion.div {...enter(0.26)} className="mt-9 flex flex-wrap items-center gap-3">
-          <ButtonLink href="#work" icon={<ArrowRight size={16} />}>
-            View projects
-          </ButtonLink>
-          <ButtonLink href={profile.cv} download variant="ghost" icon={<ArrowDown size={16} />}>
-            Download CV
-          </ButtonLink>
-          <ul className="ml-1 flex items-center gap-1">
-            {socials.map(({ label, href, Icon }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="grid h-11 w-11 place-items-center rounded-full text-muted transition-colors hover:bg-fg/[0.06] hover:text-fg"
-                >
-                  <Icon size={18} />
+            <div {...rise(0.18)}>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <ButtonLink href="#work" icon={<ArrowRight size={16} />}>
+                  View projects
+                </ButtonLink>
+                <ButtonLink href="#contact" variant="secondary" icon={<Mail size={15} />}>
+                  Get in touch
+                </ButtonLink>
+                <a href={profile.cv} download className="link ml-1 text-sm font-medium">
+                  Download CV <ArrowDown size={14} aria-hidden />
                 </a>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
+              </div>
+              <ul className="-ml-3 mt-4 flex items-center gap-1">
+                {socials.map(({ label, href, Icon }) => (
+                  <li key={label}>
+                    <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="icon-btn">
+                      <Icon size={18} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
 
-        <motion.div {...enter(0.34)} className="mt-14 border-t hairline pt-6">
-          <p className="text-xs text-subtle">Worked with</p>
-          <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
-            {experience.map((job) => (
-              <li key={job.org} className="text-sm font-medium text-muted">
-                {job.short ?? job.org}
-              </li>
-            ))}
-          </ul>
-        </motion.div>
+          <aside {...rise(0.24)} aria-label="At a glance" className="card mt-10 animate-rise p-5 lg:mt-0">
+            <p className="eyebrow">At a glance</p>
+            <dl className="mt-3 divide-y divide-hairline">
+              {profile.glance.map((g) => (
+                <div key={g.label} className="py-2.5 first:pt-0 last:pb-0">
+                  <dt className="text-xs text-subtle">{g.label}</dt>
+                  <dd className="mt-0.5 text-sm">
+                    <MaybePlaceholder text={g.value} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </aside>
+        </div>
+
+        <div {...rise(0.3)}>
+          <div className="mt-14 border-t hairline pt-6">
+            <p className="text-xs text-subtle">Worked with</p>
+            <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-3">
+              {experience.map((job) => (
+                <li key={job.org} className="flex items-center gap-2 text-sm font-medium text-muted">
+                  {job.logo ? (
+                    <img src={job.logo} alt="" width={20} height={20} className="h-5 w-5 rounded object-cover" />
+                  ) : null}
+                  {job.short ?? job.org}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   );
