@@ -1,7 +1,7 @@
-import { ArrowUpRight } from 'lucide-react';
 import { profile, writing } from '../../content/site';
 import { Reveal } from '../ui/Reveal';
 import { Section } from '../ui/Section';
+import { TextLink } from '../ui/TextLink';
 
 const fmt = new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' });
 
@@ -30,14 +30,9 @@ export function Writing() {
           </Reveal>
         ))}
       </ul>
-      <a
-        href={profile.social.medium}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-5 inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-fg"
-      >
-        All writing on Medium <ArrowUpRight size={13} aria-hidden />
-      </a>
+      <TextLink href={profile.social.medium} className="mt-5">
+        All writing on Medium
+      </TextLink>
     </Section>
   );
 }

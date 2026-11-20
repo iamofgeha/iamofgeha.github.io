@@ -1,19 +1,13 @@
-import { ArrowUpRight } from 'lucide-react';
 import { certifications, education } from '../../content/site';
 import { Section } from '../ui/Section';
+import { TextLink } from '../ui/TextLink';
 
 function Verify({ href, label }: { href?: string; label: string }) {
   if (!href) return null;
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Verify: ${label}`}
-      className="inline-flex shrink-0 items-center gap-1 text-xs text-muted transition-colors hover:text-fg"
-    >
-      Verify <ArrowUpRight size={12} aria-hidden />
-    </a>
+    <TextLink href={href} size="xs" aria-label={`Verify: ${label}`} className="shrink-0">
+      Verify
+    </TextLink>
   );
 }
 
