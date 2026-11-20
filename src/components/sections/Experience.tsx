@@ -1,9 +1,12 @@
 import { useId, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUpRight, Minus, Plus } from 'lucide-react';
+import { Minus, Plus } from 'lucide-react';
 import { experience, type Experience as Job } from '../../content/site';
+import { DashList } from '../ui/DashList';
+import { Disclosure } from '../ui/Disclosure';
+import { MaybePlaceholder } from '../ui/Placeholder';
 import { Reveal } from '../ui/Reveal';
 import { Section } from '../ui/Section';
+import { TextLink } from '../ui/TextLink';
 
 function Badge({ job }: { job: Job }) {
   if (job.logo) {
@@ -42,7 +45,7 @@ function RoleCard({ job, defaultOpen }: { job: Job; defaultOpen: boolean }) {
   const panelId = useId();
 
   return (
-    <div className="rounded-xl border hairline bg-surface/40 transition-colors hover:bg-surface/70">
+    <div className="card hover:bg-surface/70">
       <h3>
         <button
           type="button"
@@ -63,61 +66,38 @@ function RoleCard({ job, defaultOpen }: { job: Job; defaultOpen: boolean }) {
         </button>
       </h3>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            id={panelId}
-            role="region"
-            aria-label={`${job.org} details`}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            <div className="mx-4 border-t hairline pb-5 pt-4 sm:mx-5">
-              <dl className="space-y-1.5">
-                {/* The header already shows the period from sm up. */}
-                <Meta label="Period" value={job.period} className="sm:hidden" />
-                <Meta label="Job type" value={job.type} />
-                <Meta label="Location" value={job.location} />
-              </dl>
+      <Disclosure open={open} id={panelId} role="region" aria-label={`${job.org} details`}>
+        <div className="mx-4 border-t hairline pb-5 pt-4 sm:mx-5">
+          <dl className="space-y-1.5">
+            {/* The header already shows the period from sm up. */}
+            <Meta label="Period" value={job.period} className="sm:hidden" />
+            <Meta label="Job type" value={job.type} />
+            <Meta label="Location" value={job.location} />
+          </dl>
 
-              <p className="mt-4 text-pretty text-sm leading-relaxed text-muted sm:mt-0">{job.summary}</p>
+          <p className="mt-4 text-pretty text-sm leading-relaxed text-muted sm:mt-0">{job.summary}</p>
 
-              <ul className="mt-3 space-y-2">
-                {job.highlights.map((h) => (
-                  <li key={h} className="flex gap-3 text-sm leading-relaxed text-muted">
-                    <span className="mt-[0.65em] h-px w-3 shrink-0 bg-fg/30" aria-hidden />
-                    <span className="text-pretty">{h}</span>
-                  </li>
-                ))}
-              </ul>
+          <DashList
+            className="mt-3"
+            items={job.highlights.map((h) => ({ key: h, content: <MaybePlaceholder text={h} /> }))}
+          />
 
-              {(job.stack || job.link) && (
-                <div className="mt-4 flex flex-wrap items-center gap-2">
-                  {job.stack?.map((s) => (
-                    <span key={s} className="chip">
-                      {s}
-                    </span>
-                  ))}
-                  {job.link ? (
-                    <a
-                      href={job.link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="ml-1 inline-flex items-center gap-1 text-xs text-muted transition-colors hover:text-fg"
-                    >
-                      {job.link.label}
-                      <ArrowUpRight size={12} aria-hidden />
-                    </a>
-                  ) : null}
-                </div>
-              )}
+          {(job.stack || job.link) && (
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              {job.stack?.map((s) => (
+                <span key={s} className="chip">
+                  {s}
+                </span>
+              ))}
+              {job.link ? (
+                <TextLink href={job.link.href} size="xs" className="ml-1">
+                  {job.link.label}
+                </TextLink>
+              ) : null}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </div>
+      </Disclosure>
     </div>
   );
 }
