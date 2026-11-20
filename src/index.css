@@ -162,7 +162,7 @@
 
   /* Visible marker for content Ofgeha still needs to supply. Search the code for "[ADD". */
   .placeholder {
-    @apply box-decoration-clone rounded border border-dashed px-1.5 py-0.5 font-mono text-[0.75em] text-amber-600 dark:text-amber-400;
+    @apply box-decoration-clone rounded border border-dashed px-1.5 py-0.5 font-mono text-[0.75em] text-amber-700 dark:text-amber-400;
     border-color: currentColor;
   }
 
