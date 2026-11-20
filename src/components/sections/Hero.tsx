@@ -67,7 +67,7 @@ export function Hero() {
           <ButtonLink href="#work" icon={<ArrowRight size={16} />}>
             View projects
           </ButtonLink>
-          <ButtonLink href={profile.cv} download variant="ghost" icon={<ArrowDown size={16} />}>
+          <ButtonLink href={profile.cv} download variant="secondary" icon={<ArrowDown size={16} />}>
             Download CV
           </ButtonLink>
           <ul className="ml-1 flex items-center gap-1">
