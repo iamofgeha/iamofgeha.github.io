@@ -141,7 +141,7 @@ export function Nav() {
                         history.replaceState(null, '', `#${item.id}`);
                       });
                     }}
-                    className="flex items-baseline justify-between py-4 text-[1.75rem] font-medium tracking-tight"
+                    className="flex items-baseline justify-between py-4 text-title font-medium"
                   >
                     {item.label}
                     <span className="font-mono text-xs text-subtle">{String(i + 1).padStart(2, '0')}</span>

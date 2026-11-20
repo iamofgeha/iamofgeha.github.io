@@ -9,7 +9,7 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {profile.name} · {profile.location}
           </p>
-          <a href="#top" className="inline-flex items-center gap-1.5 transition-colors hover:text-fg">
+          <a href="#top" className="link gap-1.5">
             Back to top <ArrowUp size={14} aria-hidden />
           </a>
         </div>

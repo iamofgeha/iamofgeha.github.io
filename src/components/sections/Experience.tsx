@@ -23,7 +23,7 @@ function Badge({ job }: { job: Job }) {
   return (
     <span
       aria-hidden
-      className="grid h-11 w-11 shrink-0 place-items-center rounded-lg border hairline bg-fg/[0.05] font-mono text-[0.68rem] font-medium tracking-tight text-fg/80"
+      className="grid h-11 w-11 shrink-0 place-items-center rounded-lg border hairline bg-fg/[0.05] font-mono text-micro font-medium tracking-tight text-fg/80"
     >
       {job.mark}
     </span>
