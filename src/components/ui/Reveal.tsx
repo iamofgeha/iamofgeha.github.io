@@ -1,20 +1,22 @@
-import { motion, type HTMLMotionProps } from 'framer-motion';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { useInView } from '../../hooks/useInView';
 
-type Common = { delay?: number; y?: number };
-type DivProps = HTMLMotionProps<'div'> & Common & { as?: 'div' };
-type LiProps = HTMLMotionProps<'li'> & Common & { as: 'li' };
+type Props = HTMLAttributes<HTMLElement> & {
+  as?: 'div' | 'li';
+  delay?: number;
+  children?: ReactNode;
+};
 
-const ease = [0.22, 1, 0.36, 1] as const;
-
-/** Fades content up once as it enters the viewport. Reduced motion is handled by MotionConfig. */
-export function Reveal(props: DivProps | LiProps) {
-  const { delay = 0, y = 14, as, ...rest } = props;
-  const motionProps = {
-    initial: { opacity: 0, y },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: '0px 0px -12% 0px' },
-    transition: { duration: 0.6, delay, ease },
-  };
-  if (as === 'li') return <motion.li {...motionProps} {...(rest as HTMLMotionProps<'li'>)} />;
-  return <motion.div {...motionProps} {...(rest as HTMLMotionProps<'div'>)} />;
+/** Fades content up once as it enters the viewport. Reduced motion is handled in CSS (.reveal). */
+export function Reveal({ as: Tag = 'div', delay = 0, className = '', style, ...rest }: Props) {
+  const [ref, inView] = useInView<HTMLElement>();
+  return (
+    <Tag
+      // A single ref type covers both tags.
+      ref={ref as never}
+      className={`reveal ${inView ? 'is-visible' : ''} ${className}`}
+      style={delay ? { ...style, transitionDelay: `${delay}s` } : style}
+      {...rest}
+    />
+  );
 }
